@@ -1,4 +1,5 @@
 import ply.lex as lex
+import errorList as errorList
 
 #reserved words
 reserved = {
@@ -65,7 +66,9 @@ def t_newline(t):
 
 # Manejo de errores léxicos
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    line = t.lineno
+    position = t.lexpos - t.lexer.lexdata.rfind("\n", 0, t.lexpos)
+    errorList.errores.append(f"Illegal character ('{t.value[0]}',{line},{position})")
     t.lexer.skip(1)
 
 # Construir el analizador léxico

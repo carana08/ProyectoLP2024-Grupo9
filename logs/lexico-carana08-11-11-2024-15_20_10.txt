@@ -1,0 +1,9 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'suma',1,0)
+LexToken(PLUS,'+',1,6)
+LexToken(INSTANCE_VAR,'@variable',2,9)
+
+Errores:
+Illegal character ('=',1,5)
+Illegal character ('5',1,6)
+Illegal character ('2',1,8)

@@ -1,0 +1,8 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'localVar',2,0)
+LexToken(GLOBAL_VAR,'$variableGlobal',3,9)
+LexToken(INSTANCE_VAR,'@VariableInstancia',4,25)
+LexToken(CLASS_VAR,'@@VariableClase',5,44)
+LexToken(CONSTANT,'Constante',6,60)
+LexToken(PLUS,'+',8,75)
+LexToken(MINUS,'-',9,79)

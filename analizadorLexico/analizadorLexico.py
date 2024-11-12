@@ -13,6 +13,12 @@ reserved = {
     # Aporte de Johann Ramírez
     'unless': 'UNLESS',  
     'until': 'UNTIL',   
+
+    # Apórte de Luis Inga
+    'nil': 'NIL',
+    'while': 'WHILE',
+    'when': 'WHEN'
+
 }
 
 tokens = (
@@ -28,6 +34,17 @@ tokens = (
     'PLUS', 'MINUS',    # Operadores aritméticos
     'GREATER',          # Operador de comparación '>'
     'EQUAL',            # Operador de asignación o comparación '='
+
+    # Aporte de Luis Inga
+    'COMMA',
+    'L_PAREN',
+    'R_PAREN',
+    'L_MAYUS_PAREN',
+    'R_MAYUS_PAREN',
+    'L_ULTRA_PAREN',
+    'R_ULTRA_PAREN',
+    'TWO_POINTS',
+    'HASHARROW',
 )+tuple(reserved.values())
 
 #Tokens para expresiones regulares
@@ -35,6 +52,15 @@ t_PLUS = r'\+'
 t_MINUS = r'-'
 t_GREATER = r'>'
 t_EQUAL = r'='
+t_COMMA = r','
+t_L_PAREN = r'\('
+t_R_PAREN = r'\)'
+t_L_MAYUS_PAREN = r'\{'
+t_R_MAYUS_PAREN = r'}'
+t_L_ULTRA_PAREN = r'\['
+t_R_ULTRA_PAREN = r']'
+t_TWO_POINTS = r':'
+t_HASHARROW = r'=>'
 
 # Definición de expresiones regulares para tokens complejos
 def t_GLOBAL_VAR(t):
@@ -89,7 +115,7 @@ def t_error(t):
     t.lexer.skip(1)
 
 # Construir el analizador léxico
-lexer = lex.lex()
+lexer = lex.lex();
 
 
 

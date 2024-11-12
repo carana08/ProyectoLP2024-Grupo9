@@ -3,17 +3,20 @@ import errorList as errorList
 
 #reserved words
 reserved = {
-    #César Arana
+    #Aporte de César Arana
     'if': 'IF',
     'else': 'ELSE',
     'elsif': 'ELSIF',
     'end': 'END',
     'def': 'DEF',
     'class': 'CLASS',
+    # Aporte de Johann Ramírez
+    'unless': 'UNLESS',  
+    'until': 'UNTIL',   
 }
 
 tokens = (
-    #César Arana
+    #Aporte de César Arana
     'LOCAL_VAR',        # Variables locales (minúsculas o _ al inicio)
     'GLOBAL_VAR',       # Variables globales ($var)
     'INSTANCE_VAR',     # Variables de instancia (@var)
@@ -23,11 +26,15 @@ tokens = (
     'FLOAT',            # Números de punto flotante
     'STRING',           # Cadenas de texto
     'PLUS', 'MINUS',    # Operadores aritméticos
+    'GREATER',          # Operador de comparación '>'
+    'EQUAL',            # Operador de asignación o comparación '='
 )+tuple(reserved.values())
 
 #Tokens para expresiones regulares
 t_PLUS = r'\+'
 t_MINUS = r'-'
+t_GREATER = r'>'
+t_EQUAL = r'='
 
 # Definición de expresiones regulares para tokens complejos
 def t_GLOBAL_VAR(t):
@@ -49,6 +56,16 @@ def t_CONSTANT(t):
 def t_LOCAL_VAR(t):
     r'[a-z_][a-zA-Z_0-9]*'   # Empieza con minúscula o _
     t.type = reserved.get(t.value, 'LOCAL_VAR')  # Verifica si es una palabra reservada
+    return t
+
+def t_INTEGER(t):
+    r'\d+'
+    t.value = int(t.value)
+    return t
+
+def t_STRING(t):
+    r'\".*?\"'
+    t.value = t.value[1:-1]  # Remover las comillas de la cadena
     return t
 
 # Ignorar espacios y tabulaciones

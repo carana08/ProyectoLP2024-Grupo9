@@ -1,0 +1,23 @@
+Analizador lexico:
+LexToken(UNLESS,'unless',1,0)
+LexToken(LOCAL_VAR,'a',1,7)
+LexToken(LOCAL_VAR,'puts',2,15)
+LexToken(CONSTANT,'Hello',2,21)
+LexToken(END,'end',3,28)
+LexToken(UNTIL,'until',5,33)
+LexToken(LOCAL_VAR,'x',5,39)
+LexToken(LOCAL_VAR,'x',6,49)
+LexToken(PLUS,'+',6,51)
+LexToken(END,'end',7,56)
+
+Errores:
+Illegal character ('>',1,10)
+Illegal character ('5',1,12)
+Illegal character ('"',2,8)
+Illegal character ('"',2,14)
+Illegal character ('=',5,9)
+Illegal character ('=',5,10)
+Illegal character ('1',5,12)
+Illegal character ('0',5,13)
+Illegal character ('=',6,6)
+Illegal character ('1',6,8)

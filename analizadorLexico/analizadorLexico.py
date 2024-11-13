@@ -10,6 +10,8 @@ reserved = {
     'end': 'END',
     'def': 'DEF',
     'class': 'CLASS',
+    'begin': 'BEGIN',
+    'end': 'END',
     # Aporte de Johann Ramírez
     'unless': 'UNLESS',  
     'until': 'UNTIL',   
@@ -84,6 +86,11 @@ def t_LOCAL_VAR(t):
     t.type = reserved.get(t.value, 'LOCAL_VAR')  # Verifica si es una palabra reservada
     return t
 
+def t_FLOAT(t):
+    r'\d+\.\d+'
+    t.value = float(t.value)
+    return t
+
 def t_INTEGER(t):
     r'\d+'
     t.value = int(t.value)
@@ -101,6 +108,11 @@ t_ignore = ' \t'
 def t_comment(t):
     r'\#.*'
     pass  # Ignorar comentarios
+
+# Comentarios multilínea delimitados por =begin y =end
+def t_COMMENT_MULTILINE(t):
+    r'=begin(\n|.)*?=end'
+    pass # Ignorar el contenido del comentario multilínea
 
 # Definición de salto de línea
 def t_newline(t):

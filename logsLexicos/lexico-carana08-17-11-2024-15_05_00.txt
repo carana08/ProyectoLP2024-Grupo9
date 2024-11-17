@@ -1,0 +1,2 @@
+Analizador lexico:
+LexToken(STRING,'5',1,0)

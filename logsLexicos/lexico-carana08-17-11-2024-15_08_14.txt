@@ -1,0 +1,12 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'var',1,0)
+LexToken(ASSIGN,'=',1,4)
+LexToken(L_ULTRA_PAREN,'[',1,6)
+LexToken(INTEGER,1,1,7)
+LexToken(COMMA,',',1,8)
+LexToken(INTEGER,2,1,9)
+LexToken(COMMA,',',1,10)
+LexToken(INTEGER,3,1,11)
+LexToken(COMMA,',',1,12)
+LexToken(INTEGER,4,1,13)
+LexToken(R_ULTRA_PAREN,']',1,14)

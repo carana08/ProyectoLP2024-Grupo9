@@ -1,0 +1,1253 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    BEGIN
+    CLASS
+    CLASS_VAR
+    CONSTANT
+    ELSIF
+    GLOBAL_VAR
+    HASHARROW
+    INSTANCE_VAR
+    L_MAYUS_PAREN
+    MINUS
+    NIL
+    PLUS
+    PUTS
+    R_MAYUS_PAREN
+    THEN
+    TWO_POINTS
+    UNLESS
+    UNTIL
+    WHEN
+    WHILE
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement
+Rule 3     statement_list -> statement_list statement
+Rule 4     statement -> print_statement
+Rule 5     statement -> input_statement
+Rule 6     statement -> data_structure
+Rule 7     statement -> control_structure
+Rule 8     statement -> function_definition
+Rule 9     print_statement -> PRINT L_PAREN argument_list R_PAREN
+Rule 10    print_statement -> PRINT L_PAREN R_PAREN
+Rule 11    print_statement -> PRINT argument_list
+Rule 12    print_statement -> PRINT
+Rule 13    argument_list -> expression
+Rule 14    argument_list -> argument_list COMMA expression
+Rule 15    input_statement -> LOCAL_VAR ASSIGN GETS
+Rule 16    input_statement -> LOCAL_VAR ASSIGN GETS DOT CHOMP
+Rule 17    data_structure -> array_definition
+Rule 18    array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+Rule 19    element_list -> expression
+Rule 20    element_list -> element_list COMMA expression
+Rule 21    control_structure -> if_statement
+Rule 22    if_statement -> IF condition statement_list END
+Rule 23    if_statement -> IF condition statement_list ELSE statement_list END
+Rule 24    condition -> expression comparison_operator expression
+Rule 25    function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END
+Rule 26    parameter_list -> LOCAL_VAR
+Rule 27    parameter_list -> parameter_list COMMA LOCAL_VAR
+Rule 28    parameter_list -> empty
+Rule 29    expression -> INTEGER
+Rule 30    expression -> FLOAT
+Rule 31    expression -> STRING
+Rule 32    expression -> LOCAL_VAR
+Rule 33    expression -> array_access
+Rule 34    array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+Rule 35    comparison_operator -> EQUALS
+Rule 36    comparison_operator -> DIFFERENT
+Rule 37    comparison_operator -> LESS
+Rule 38    comparison_operator -> LESS_EQUAL
+Rule 39    comparison_operator -> GREATER
+Rule 40    comparison_operator -> GREATER_EQUAL
+Rule 41    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ASSIGN               : 15 16 18
+BEGIN                : 
+CHOMP                : 16
+CLASS                : 
+CLASS_VAR            : 
+COMMA                : 14 20 27
+CONSTANT             : 
+DEF                  : 25
+DIFFERENT            : 36
+DOT                  : 16
+ELSE                 : 23
+ELSIF                : 
+END                  : 22 23 25
+EQUALS               : 35
+FLOAT                : 30
+GETS                 : 15 16
+GLOBAL_VAR           : 
+GREATER              : 39
+GREATER_EQUAL        : 40
+HASHARROW            : 
+IF                   : 22 23
+INSTANCE_VAR         : 
+INTEGER              : 29
+LESS                 : 37
+LESS_EQUAL           : 38
+LOCAL_VAR            : 15 16 18 25 26 27 32 34
+L_MAYUS_PAREN        : 
+L_PAREN              : 9 10 25
+L_ULTRA_PAREN        : 18 34
+MINUS                : 
+NIL                  : 
+PLUS                 : 
+PRINT                : 9 10 11 12
+PUTS                 : 
+R_MAYUS_PAREN        : 
+R_PAREN              : 9 10 25
+R_ULTRA_PAREN        : 18 34
+STRING               : 31
+THEN                 : 
+TWO_POINTS           : 
+UNLESS               : 
+UNTIL                : 
+WHEN                 : 
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+argument_list        : 9 11 14
+array_access         : 33
+array_definition     : 17
+comparison_operator  : 24
+condition            : 22 23
+control_structure    : 7
+data_structure       : 6
+element_list         : 18 20
+empty                : 28
+expression           : 13 14 19 20 24 24 34
+function_definition  : 8
+if_statement         : 21
+input_statement      : 5
+parameter_list       : 25 27
+print_statement      : 4
+program              : 0
+statement            : 2 3
+statement_list       : 1 3 22 23 23 25
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement_list statement
+    (4) statement -> . print_statement
+    (5) statement -> . input_statement
+    (6) statement -> . data_structure
+    (7) statement -> . control_structure
+    (8) statement -> . function_definition
+    (9) print_statement -> . PRINT L_PAREN argument_list R_PAREN
+    (10) print_statement -> . PRINT L_PAREN R_PAREN
+    (11) print_statement -> . PRINT argument_list
+    (12) print_statement -> . PRINT
+    (15) input_statement -> . LOCAL_VAR ASSIGN GETS
+    (16) input_statement -> . LOCAL_VAR ASSIGN GETS DOT CHOMP
+    (17) data_structure -> . array_definition
+    (21) control_structure -> . if_statement
+    (25) function_definition -> . DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END
+    (18) array_definition -> . LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+    (22) if_statement -> . IF condition statement_list END
+    (23) if_statement -> . IF condition statement_list ELSE statement_list END
+
+    PRINT           shift and go to state 9
+    LOCAL_VAR       shift and go to state 10
+    DEF             shift and go to state 13
+    IF              shift and go to state 14
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    print_statement                shift and go to state 4
+    input_statement                shift and go to state 5
+    data_structure                 shift and go to state 6
+    control_structure              shift and go to state 7
+    function_definition            shift and go to state 8
+    array_definition               shift and go to state 11
+    if_statement                   shift and go to state 12
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+    (3) statement_list -> statement_list . statement
+    (4) statement -> . print_statement
+    (5) statement -> . input_statement
+    (6) statement -> . data_structure
+    (7) statement -> . control_structure
+    (8) statement -> . function_definition
+    (9) print_statement -> . PRINT L_PAREN argument_list R_PAREN
+    (10) print_statement -> . PRINT L_PAREN R_PAREN
+    (11) print_statement -> . PRINT argument_list
+    (12) print_statement -> . PRINT
+    (15) input_statement -> . LOCAL_VAR ASSIGN GETS
+    (16) input_statement -> . LOCAL_VAR ASSIGN GETS DOT CHOMP
+    (17) data_structure -> . array_definition
+    (21) control_structure -> . if_statement
+    (25) function_definition -> . DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END
+    (18) array_definition -> . LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+    (22) if_statement -> . IF condition statement_list END
+    (23) if_statement -> . IF condition statement_list ELSE statement_list END
+
+    $end            reduce using rule 1 (program -> statement_list .)
+    PRINT           shift and go to state 9
+    LOCAL_VAR       shift and go to state 10
+    DEF             shift and go to state 13
+    IF              shift and go to state 14
+
+    statement                      shift and go to state 15
+    print_statement                shift and go to state 4
+    input_statement                shift and go to state 5
+    data_structure                 shift and go to state 6
+    control_structure              shift and go to state 7
+    function_definition            shift and go to state 8
+    array_definition               shift and go to state 11
+    if_statement                   shift and go to state 12
+
+state 3
+
+    (2) statement_list -> statement .
+
+    PRINT           reduce using rule 2 (statement_list -> statement .)
+    LOCAL_VAR       reduce using rule 2 (statement_list -> statement .)
+    DEF             reduce using rule 2 (statement_list -> statement .)
+    IF              reduce using rule 2 (statement_list -> statement .)
+    $end            reduce using rule 2 (statement_list -> statement .)
+    END             reduce using rule 2 (statement_list -> statement .)
+    ELSE            reduce using rule 2 (statement_list -> statement .)
+
+
+state 4
+
+    (4) statement -> print_statement .
+
+    PRINT           reduce using rule 4 (statement -> print_statement .)
+    LOCAL_VAR       reduce using rule 4 (statement -> print_statement .)
+    DEF             reduce using rule 4 (statement -> print_statement .)
+    IF              reduce using rule 4 (statement -> print_statement .)
+    $end            reduce using rule 4 (statement -> print_statement .)
+    END             reduce using rule 4 (statement -> print_statement .)
+    ELSE            reduce using rule 4 (statement -> print_statement .)
+
+
+state 5
+
+    (5) statement -> input_statement .
+
+    PRINT           reduce using rule 5 (statement -> input_statement .)
+    LOCAL_VAR       reduce using rule 5 (statement -> input_statement .)
+    DEF             reduce using rule 5 (statement -> input_statement .)
+    IF              reduce using rule 5 (statement -> input_statement .)
+    $end            reduce using rule 5 (statement -> input_statement .)
+    END             reduce using rule 5 (statement -> input_statement .)
+    ELSE            reduce using rule 5 (statement -> input_statement .)
+
+
+state 6
+
+    (6) statement -> data_structure .
+
+    PRINT           reduce using rule 6 (statement -> data_structure .)
+    LOCAL_VAR       reduce using rule 6 (statement -> data_structure .)
+    DEF             reduce using rule 6 (statement -> data_structure .)
+    IF              reduce using rule 6 (statement -> data_structure .)
+    $end            reduce using rule 6 (statement -> data_structure .)
+    END             reduce using rule 6 (statement -> data_structure .)
+    ELSE            reduce using rule 6 (statement -> data_structure .)
+
+
+state 7
+
+    (7) statement -> control_structure .
+
+    PRINT           reduce using rule 7 (statement -> control_structure .)
+    LOCAL_VAR       reduce using rule 7 (statement -> control_structure .)
+    DEF             reduce using rule 7 (statement -> control_structure .)
+    IF              reduce using rule 7 (statement -> control_structure .)
+    $end            reduce using rule 7 (statement -> control_structure .)
+    END             reduce using rule 7 (statement -> control_structure .)
+    ELSE            reduce using rule 7 (statement -> control_structure .)
+
+
+state 8
+
+    (8) statement -> function_definition .
+
+    PRINT           reduce using rule 8 (statement -> function_definition .)
+    LOCAL_VAR       reduce using rule 8 (statement -> function_definition .)
+    DEF             reduce using rule 8 (statement -> function_definition .)
+    IF              reduce using rule 8 (statement -> function_definition .)
+    $end            reduce using rule 8 (statement -> function_definition .)
+    END             reduce using rule 8 (statement -> function_definition .)
+    ELSE            reduce using rule 8 (statement -> function_definition .)
+
+
+state 9
+
+    (9) print_statement -> PRINT . L_PAREN argument_list R_PAREN
+    (10) print_statement -> PRINT . L_PAREN R_PAREN
+    (11) print_statement -> PRINT . argument_list
+    (12) print_statement -> PRINT .
+    (13) argument_list -> . expression
+    (14) argument_list -> . argument_list COMMA expression
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+  ! shift/reduce conflict for LOCAL_VAR resolved as shift
+    L_PAREN         shift and go to state 16
+    PRINT           reduce using rule 12 (print_statement -> PRINT .)
+    DEF             reduce using rule 12 (print_statement -> PRINT .)
+    IF              reduce using rule 12 (print_statement -> PRINT .)
+    $end            reduce using rule 12 (print_statement -> PRINT .)
+    END             reduce using rule 12 (print_statement -> PRINT .)
+    ELSE            reduce using rule 12 (print_statement -> PRINT .)
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+  ! LOCAL_VAR       [ reduce using rule 12 (print_statement -> PRINT .) ]
+
+    argument_list                  shift and go to state 17
+    expression                     shift and go to state 18
+    array_access                   shift and go to state 23
+
+state 10
+
+    (15) input_statement -> LOCAL_VAR . ASSIGN GETS
+    (16) input_statement -> LOCAL_VAR . ASSIGN GETS DOT CHOMP
+    (18) array_definition -> LOCAL_VAR . ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+
+    ASSIGN          shift and go to state 24
+
+
+state 11
+
+    (17) data_structure -> array_definition .
+
+    PRINT           reduce using rule 17 (data_structure -> array_definition .)
+    LOCAL_VAR       reduce using rule 17 (data_structure -> array_definition .)
+    DEF             reduce using rule 17 (data_structure -> array_definition .)
+    IF              reduce using rule 17 (data_structure -> array_definition .)
+    $end            reduce using rule 17 (data_structure -> array_definition .)
+    END             reduce using rule 17 (data_structure -> array_definition .)
+    ELSE            reduce using rule 17 (data_structure -> array_definition .)
+
+
+state 12
+
+    (21) control_structure -> if_statement .
+
+    PRINT           reduce using rule 21 (control_structure -> if_statement .)
+    LOCAL_VAR       reduce using rule 21 (control_structure -> if_statement .)
+    DEF             reduce using rule 21 (control_structure -> if_statement .)
+    IF              reduce using rule 21 (control_structure -> if_statement .)
+    $end            reduce using rule 21 (control_structure -> if_statement .)
+    END             reduce using rule 21 (control_structure -> if_statement .)
+    ELSE            reduce using rule 21 (control_structure -> if_statement .)
+
+
+state 13
+
+    (25) function_definition -> DEF . LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END
+
+    LOCAL_VAR       shift and go to state 25
+
+
+state 14
+
+    (22) if_statement -> IF . condition statement_list END
+    (23) if_statement -> IF . condition statement_list ELSE statement_list END
+    (24) condition -> . expression comparison_operator expression
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    condition                      shift and go to state 26
+    expression                     shift and go to state 27
+    array_access                   shift and go to state 23
+
+state 15
+
+    (3) statement_list -> statement_list statement .
+
+    PRINT           reduce using rule 3 (statement_list -> statement_list statement .)
+    LOCAL_VAR       reduce using rule 3 (statement_list -> statement_list statement .)
+    DEF             reduce using rule 3 (statement_list -> statement_list statement .)
+    IF              reduce using rule 3 (statement_list -> statement_list statement .)
+    $end            reduce using rule 3 (statement_list -> statement_list statement .)
+    END             reduce using rule 3 (statement_list -> statement_list statement .)
+    ELSE            reduce using rule 3 (statement_list -> statement_list statement .)
+
+
+state 16
+
+    (9) print_statement -> PRINT L_PAREN . argument_list R_PAREN
+    (10) print_statement -> PRINT L_PAREN . R_PAREN
+    (13) argument_list -> . expression
+    (14) argument_list -> . argument_list COMMA expression
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    R_PAREN         shift and go to state 29
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    argument_list                  shift and go to state 28
+    expression                     shift and go to state 18
+    array_access                   shift and go to state 23
+
+state 17
+
+    (11) print_statement -> PRINT argument_list .
+    (14) argument_list -> argument_list . COMMA expression
+
+    PRINT           reduce using rule 11 (print_statement -> PRINT argument_list .)
+    LOCAL_VAR       reduce using rule 11 (print_statement -> PRINT argument_list .)
+    DEF             reduce using rule 11 (print_statement -> PRINT argument_list .)
+    IF              reduce using rule 11 (print_statement -> PRINT argument_list .)
+    $end            reduce using rule 11 (print_statement -> PRINT argument_list .)
+    END             reduce using rule 11 (print_statement -> PRINT argument_list .)
+    ELSE            reduce using rule 11 (print_statement -> PRINT argument_list .)
+    COMMA           shift and go to state 30
+
+
+state 18
+
+    (13) argument_list -> expression .
+
+    COMMA           reduce using rule 13 (argument_list -> expression .)
+    PRINT           reduce using rule 13 (argument_list -> expression .)
+    LOCAL_VAR       reduce using rule 13 (argument_list -> expression .)
+    DEF             reduce using rule 13 (argument_list -> expression .)
+    IF              reduce using rule 13 (argument_list -> expression .)
+    $end            reduce using rule 13 (argument_list -> expression .)
+    END             reduce using rule 13 (argument_list -> expression .)
+    ELSE            reduce using rule 13 (argument_list -> expression .)
+    R_PAREN         reduce using rule 13 (argument_list -> expression .)
+
+
+state 19
+
+    (29) expression -> INTEGER .
+
+    COMMA           reduce using rule 29 (expression -> INTEGER .)
+    PRINT           reduce using rule 29 (expression -> INTEGER .)
+    LOCAL_VAR       reduce using rule 29 (expression -> INTEGER .)
+    DEF             reduce using rule 29 (expression -> INTEGER .)
+    IF              reduce using rule 29 (expression -> INTEGER .)
+    $end            reduce using rule 29 (expression -> INTEGER .)
+    END             reduce using rule 29 (expression -> INTEGER .)
+    ELSE            reduce using rule 29 (expression -> INTEGER .)
+    EQUALS          reduce using rule 29 (expression -> INTEGER .)
+    DIFFERENT       reduce using rule 29 (expression -> INTEGER .)
+    LESS            reduce using rule 29 (expression -> INTEGER .)
+    LESS_EQUAL      reduce using rule 29 (expression -> INTEGER .)
+    GREATER         reduce using rule 29 (expression -> INTEGER .)
+    GREATER_EQUAL   reduce using rule 29 (expression -> INTEGER .)
+    R_PAREN         reduce using rule 29 (expression -> INTEGER .)
+    R_ULTRA_PAREN   reduce using rule 29 (expression -> INTEGER .)
+
+
+state 20
+
+    (30) expression -> FLOAT .
+
+    COMMA           reduce using rule 30 (expression -> FLOAT .)
+    PRINT           reduce using rule 30 (expression -> FLOAT .)
+    LOCAL_VAR       reduce using rule 30 (expression -> FLOAT .)
+    DEF             reduce using rule 30 (expression -> FLOAT .)
+    IF              reduce using rule 30 (expression -> FLOAT .)
+    $end            reduce using rule 30 (expression -> FLOAT .)
+    END             reduce using rule 30 (expression -> FLOAT .)
+    ELSE            reduce using rule 30 (expression -> FLOAT .)
+    EQUALS          reduce using rule 30 (expression -> FLOAT .)
+    DIFFERENT       reduce using rule 30 (expression -> FLOAT .)
+    LESS            reduce using rule 30 (expression -> FLOAT .)
+    LESS_EQUAL      reduce using rule 30 (expression -> FLOAT .)
+    GREATER         reduce using rule 30 (expression -> FLOAT .)
+    GREATER_EQUAL   reduce using rule 30 (expression -> FLOAT .)
+    R_PAREN         reduce using rule 30 (expression -> FLOAT .)
+    R_ULTRA_PAREN   reduce using rule 30 (expression -> FLOAT .)
+
+
+state 21
+
+    (31) expression -> STRING .
+
+    COMMA           reduce using rule 31 (expression -> STRING .)
+    PRINT           reduce using rule 31 (expression -> STRING .)
+    LOCAL_VAR       reduce using rule 31 (expression -> STRING .)
+    DEF             reduce using rule 31 (expression -> STRING .)
+    IF              reduce using rule 31 (expression -> STRING .)
+    $end            reduce using rule 31 (expression -> STRING .)
+    END             reduce using rule 31 (expression -> STRING .)
+    ELSE            reduce using rule 31 (expression -> STRING .)
+    EQUALS          reduce using rule 31 (expression -> STRING .)
+    DIFFERENT       reduce using rule 31 (expression -> STRING .)
+    LESS            reduce using rule 31 (expression -> STRING .)
+    LESS_EQUAL      reduce using rule 31 (expression -> STRING .)
+    GREATER         reduce using rule 31 (expression -> STRING .)
+    GREATER_EQUAL   reduce using rule 31 (expression -> STRING .)
+    R_PAREN         reduce using rule 31 (expression -> STRING .)
+    R_ULTRA_PAREN   reduce using rule 31 (expression -> STRING .)
+
+
+state 22
+
+    (32) expression -> LOCAL_VAR .
+    (34) array_access -> LOCAL_VAR . L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    COMMA           reduce using rule 32 (expression -> LOCAL_VAR .)
+    PRINT           reduce using rule 32 (expression -> LOCAL_VAR .)
+    LOCAL_VAR       reduce using rule 32 (expression -> LOCAL_VAR .)
+    DEF             reduce using rule 32 (expression -> LOCAL_VAR .)
+    IF              reduce using rule 32 (expression -> LOCAL_VAR .)
+    $end            reduce using rule 32 (expression -> LOCAL_VAR .)
+    END             reduce using rule 32 (expression -> LOCAL_VAR .)
+    ELSE            reduce using rule 32 (expression -> LOCAL_VAR .)
+    EQUALS          reduce using rule 32 (expression -> LOCAL_VAR .)
+    DIFFERENT       reduce using rule 32 (expression -> LOCAL_VAR .)
+    LESS            reduce using rule 32 (expression -> LOCAL_VAR .)
+    LESS_EQUAL      reduce using rule 32 (expression -> LOCAL_VAR .)
+    GREATER         reduce using rule 32 (expression -> LOCAL_VAR .)
+    GREATER_EQUAL   reduce using rule 32 (expression -> LOCAL_VAR .)
+    R_PAREN         reduce using rule 32 (expression -> LOCAL_VAR .)
+    R_ULTRA_PAREN   reduce using rule 32 (expression -> LOCAL_VAR .)
+    L_ULTRA_PAREN   shift and go to state 31
+
+
+state 23
+
+    (33) expression -> array_access .
+
+    COMMA           reduce using rule 33 (expression -> array_access .)
+    PRINT           reduce using rule 33 (expression -> array_access .)
+    LOCAL_VAR       reduce using rule 33 (expression -> array_access .)
+    DEF             reduce using rule 33 (expression -> array_access .)
+    IF              reduce using rule 33 (expression -> array_access .)
+    $end            reduce using rule 33 (expression -> array_access .)
+    END             reduce using rule 33 (expression -> array_access .)
+    ELSE            reduce using rule 33 (expression -> array_access .)
+    EQUALS          reduce using rule 33 (expression -> array_access .)
+    DIFFERENT       reduce using rule 33 (expression -> array_access .)
+    LESS            reduce using rule 33 (expression -> array_access .)
+    LESS_EQUAL      reduce using rule 33 (expression -> array_access .)
+    GREATER         reduce using rule 33 (expression -> array_access .)
+    GREATER_EQUAL   reduce using rule 33 (expression -> array_access .)
+    R_PAREN         reduce using rule 33 (expression -> array_access .)
+    R_ULTRA_PAREN   reduce using rule 33 (expression -> array_access .)
+
+
+state 24
+
+    (15) input_statement -> LOCAL_VAR ASSIGN . GETS
+    (16) input_statement -> LOCAL_VAR ASSIGN . GETS DOT CHOMP
+    (18) array_definition -> LOCAL_VAR ASSIGN . L_ULTRA_PAREN element_list R_ULTRA_PAREN
+
+    GETS            shift and go to state 32
+    L_ULTRA_PAREN   shift and go to state 33
+
+
+state 25
+
+    (25) function_definition -> DEF LOCAL_VAR . L_PAREN parameter_list R_PAREN statement_list END
+
+    L_PAREN         shift and go to state 34
+
+
+state 26
+
+    (22) if_statement -> IF condition . statement_list END
+    (23) if_statement -> IF condition . statement_list ELSE statement_list END
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement_list statement
+    (4) statement -> . print_statement
+    (5) statement -> . input_statement
+    (6) statement -> . data_structure
+    (7) statement -> . control_structure
+    (8) statement -> . function_definition
+    (9) print_statement -> . PRINT L_PAREN argument_list R_PAREN
+    (10) print_statement -> . PRINT L_PAREN R_PAREN
+    (11) print_statement -> . PRINT argument_list
+    (12) print_statement -> . PRINT
+    (15) input_statement -> . LOCAL_VAR ASSIGN GETS
+    (16) input_statement -> . LOCAL_VAR ASSIGN GETS DOT CHOMP
+    (17) data_structure -> . array_definition
+    (21) control_structure -> . if_statement
+    (25) function_definition -> . DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END
+    (18) array_definition -> . LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+    (22) if_statement -> . IF condition statement_list END
+    (23) if_statement -> . IF condition statement_list ELSE statement_list END
+
+    PRINT           shift and go to state 9
+    LOCAL_VAR       shift and go to state 10
+    DEF             shift and go to state 13
+    IF              shift and go to state 14
+
+    statement_list                 shift and go to state 35
+    statement                      shift and go to state 3
+    print_statement                shift and go to state 4
+    input_statement                shift and go to state 5
+    data_structure                 shift and go to state 6
+    control_structure              shift and go to state 7
+    function_definition            shift and go to state 8
+    array_definition               shift and go to state 11
+    if_statement                   shift and go to state 12
+
+state 27
+
+    (24) condition -> expression . comparison_operator expression
+    (35) comparison_operator -> . EQUALS
+    (36) comparison_operator -> . DIFFERENT
+    (37) comparison_operator -> . LESS
+    (38) comparison_operator -> . LESS_EQUAL
+    (39) comparison_operator -> . GREATER
+    (40) comparison_operator -> . GREATER_EQUAL
+
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
+
+    comparison_operator            shift and go to state 36
+
+state 28
+
+    (9) print_statement -> PRINT L_PAREN argument_list . R_PAREN
+    (14) argument_list -> argument_list . COMMA expression
+
+    R_PAREN         shift and go to state 43
+    COMMA           shift and go to state 30
+
+
+state 29
+
+    (10) print_statement -> PRINT L_PAREN R_PAREN .
+
+    PRINT           reduce using rule 10 (print_statement -> PRINT L_PAREN R_PAREN .)
+    LOCAL_VAR       reduce using rule 10 (print_statement -> PRINT L_PAREN R_PAREN .)
+    DEF             reduce using rule 10 (print_statement -> PRINT L_PAREN R_PAREN .)
+    IF              reduce using rule 10 (print_statement -> PRINT L_PAREN R_PAREN .)
+    $end            reduce using rule 10 (print_statement -> PRINT L_PAREN R_PAREN .)
+    END             reduce using rule 10 (print_statement -> PRINT L_PAREN R_PAREN .)
+    ELSE            reduce using rule 10 (print_statement -> PRINT L_PAREN R_PAREN .)
+
+
+state 30
+
+    (14) argument_list -> argument_list COMMA . expression
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    expression                     shift and go to state 44
+    array_access                   shift and go to state 23
+
+state 31
+
+    (34) array_access -> LOCAL_VAR L_ULTRA_PAREN . expression R_ULTRA_PAREN
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    expression                     shift and go to state 45
+    array_access                   shift and go to state 23
+
+state 32
+
+    (15) input_statement -> LOCAL_VAR ASSIGN GETS .
+    (16) input_statement -> LOCAL_VAR ASSIGN GETS . DOT CHOMP
+
+    PRINT           reduce using rule 15 (input_statement -> LOCAL_VAR ASSIGN GETS .)
+    LOCAL_VAR       reduce using rule 15 (input_statement -> LOCAL_VAR ASSIGN GETS .)
+    DEF             reduce using rule 15 (input_statement -> LOCAL_VAR ASSIGN GETS .)
+    IF              reduce using rule 15 (input_statement -> LOCAL_VAR ASSIGN GETS .)
+    $end            reduce using rule 15 (input_statement -> LOCAL_VAR ASSIGN GETS .)
+    END             reduce using rule 15 (input_statement -> LOCAL_VAR ASSIGN GETS .)
+    ELSE            reduce using rule 15 (input_statement -> LOCAL_VAR ASSIGN GETS .)
+    DOT             shift and go to state 46
+
+
+state 33
+
+    (18) array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN . element_list R_ULTRA_PAREN
+    (19) element_list -> . expression
+    (20) element_list -> . element_list COMMA expression
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    element_list                   shift and go to state 47
+    expression                     shift and go to state 48
+    array_access                   shift and go to state 23
+
+state 34
+
+    (25) function_definition -> DEF LOCAL_VAR L_PAREN . parameter_list R_PAREN statement_list END
+    (26) parameter_list -> . LOCAL_VAR
+    (27) parameter_list -> . parameter_list COMMA LOCAL_VAR
+    (28) parameter_list -> . empty
+    (41) empty -> .
+
+    LOCAL_VAR       shift and go to state 49
+    R_PAREN         reduce using rule 41 (empty -> .)
+    COMMA           reduce using rule 41 (empty -> .)
+
+    parameter_list                 shift and go to state 50
+    empty                          shift and go to state 51
+
+state 35
+
+    (22) if_statement -> IF condition statement_list . END
+    (23) if_statement -> IF condition statement_list . ELSE statement_list END
+    (3) statement_list -> statement_list . statement
+    (4) statement -> . print_statement
+    (5) statement -> . input_statement
+    (6) statement -> . data_structure
+    (7) statement -> . control_structure
+    (8) statement -> . function_definition
+    (9) print_statement -> . PRINT L_PAREN argument_list R_PAREN
+    (10) print_statement -> . PRINT L_PAREN R_PAREN
+    (11) print_statement -> . PRINT argument_list
+    (12) print_statement -> . PRINT
+    (15) input_statement -> . LOCAL_VAR ASSIGN GETS
+    (16) input_statement -> . LOCAL_VAR ASSIGN GETS DOT CHOMP
+    (17) data_structure -> . array_definition
+    (21) control_structure -> . if_statement
+    (25) function_definition -> . DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END
+    (18) array_definition -> . LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+    (22) if_statement -> . IF condition statement_list END
+    (23) if_statement -> . IF condition statement_list ELSE statement_list END
+
+    END             shift and go to state 52
+    ELSE            shift and go to state 53
+    PRINT           shift and go to state 9
+    LOCAL_VAR       shift and go to state 10
+    DEF             shift and go to state 13
+    IF              shift and go to state 14
+
+    statement                      shift and go to state 15
+    print_statement                shift and go to state 4
+    input_statement                shift and go to state 5
+    data_structure                 shift and go to state 6
+    control_structure              shift and go to state 7
+    function_definition            shift and go to state 8
+    array_definition               shift and go to state 11
+    if_statement                   shift and go to state 12
+
+state 36
+
+    (24) condition -> expression comparison_operator . expression
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    expression                     shift and go to state 54
+    array_access                   shift and go to state 23
+
+state 37
+
+    (35) comparison_operator -> EQUALS .
+
+    INTEGER         reduce using rule 35 (comparison_operator -> EQUALS .)
+    FLOAT           reduce using rule 35 (comparison_operator -> EQUALS .)
+    STRING          reduce using rule 35 (comparison_operator -> EQUALS .)
+    LOCAL_VAR       reduce using rule 35 (comparison_operator -> EQUALS .)
+
+
+state 38
+
+    (36) comparison_operator -> DIFFERENT .
+
+    INTEGER         reduce using rule 36 (comparison_operator -> DIFFERENT .)
+    FLOAT           reduce using rule 36 (comparison_operator -> DIFFERENT .)
+    STRING          reduce using rule 36 (comparison_operator -> DIFFERENT .)
+    LOCAL_VAR       reduce using rule 36 (comparison_operator -> DIFFERENT .)
+
+
+state 39
+
+    (37) comparison_operator -> LESS .
+
+    INTEGER         reduce using rule 37 (comparison_operator -> LESS .)
+    FLOAT           reduce using rule 37 (comparison_operator -> LESS .)
+    STRING          reduce using rule 37 (comparison_operator -> LESS .)
+    LOCAL_VAR       reduce using rule 37 (comparison_operator -> LESS .)
+
+
+state 40
+
+    (38) comparison_operator -> LESS_EQUAL .
+
+    INTEGER         reduce using rule 38 (comparison_operator -> LESS_EQUAL .)
+    FLOAT           reduce using rule 38 (comparison_operator -> LESS_EQUAL .)
+    STRING          reduce using rule 38 (comparison_operator -> LESS_EQUAL .)
+    LOCAL_VAR       reduce using rule 38 (comparison_operator -> LESS_EQUAL .)
+
+
+state 41
+
+    (39) comparison_operator -> GREATER .
+
+    INTEGER         reduce using rule 39 (comparison_operator -> GREATER .)
+    FLOAT           reduce using rule 39 (comparison_operator -> GREATER .)
+    STRING          reduce using rule 39 (comparison_operator -> GREATER .)
+    LOCAL_VAR       reduce using rule 39 (comparison_operator -> GREATER .)
+
+
+state 42
+
+    (40) comparison_operator -> GREATER_EQUAL .
+
+    INTEGER         reduce using rule 40 (comparison_operator -> GREATER_EQUAL .)
+    FLOAT           reduce using rule 40 (comparison_operator -> GREATER_EQUAL .)
+    STRING          reduce using rule 40 (comparison_operator -> GREATER_EQUAL .)
+    LOCAL_VAR       reduce using rule 40 (comparison_operator -> GREATER_EQUAL .)
+
+
+state 43
+
+    (9) print_statement -> PRINT L_PAREN argument_list R_PAREN .
+
+    PRINT           reduce using rule 9 (print_statement -> PRINT L_PAREN argument_list R_PAREN .)
+    LOCAL_VAR       reduce using rule 9 (print_statement -> PRINT L_PAREN argument_list R_PAREN .)
+    DEF             reduce using rule 9 (print_statement -> PRINT L_PAREN argument_list R_PAREN .)
+    IF              reduce using rule 9 (print_statement -> PRINT L_PAREN argument_list R_PAREN .)
+    $end            reduce using rule 9 (print_statement -> PRINT L_PAREN argument_list R_PAREN .)
+    END             reduce using rule 9 (print_statement -> PRINT L_PAREN argument_list R_PAREN .)
+    ELSE            reduce using rule 9 (print_statement -> PRINT L_PAREN argument_list R_PAREN .)
+
+
+state 44
+
+    (14) argument_list -> argument_list COMMA expression .
+
+    COMMA           reduce using rule 14 (argument_list -> argument_list COMMA expression .)
+    PRINT           reduce using rule 14 (argument_list -> argument_list COMMA expression .)
+    LOCAL_VAR       reduce using rule 14 (argument_list -> argument_list COMMA expression .)
+    DEF             reduce using rule 14 (argument_list -> argument_list COMMA expression .)
+    IF              reduce using rule 14 (argument_list -> argument_list COMMA expression .)
+    $end            reduce using rule 14 (argument_list -> argument_list COMMA expression .)
+    END             reduce using rule 14 (argument_list -> argument_list COMMA expression .)
+    ELSE            reduce using rule 14 (argument_list -> argument_list COMMA expression .)
+    R_PAREN         reduce using rule 14 (argument_list -> argument_list COMMA expression .)
+
+
+state 45
+
+    (34) array_access -> LOCAL_VAR L_ULTRA_PAREN expression . R_ULTRA_PAREN
+
+    R_ULTRA_PAREN   shift and go to state 55
+
+
+state 46
+
+    (16) input_statement -> LOCAL_VAR ASSIGN GETS DOT . CHOMP
+
+    CHOMP           shift and go to state 56
+
+
+state 47
+
+    (18) array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list . R_ULTRA_PAREN
+    (20) element_list -> element_list . COMMA expression
+
+    R_ULTRA_PAREN   shift and go to state 57
+    COMMA           shift and go to state 58
+
+
+state 48
+
+    (19) element_list -> expression .
+
+    R_ULTRA_PAREN   reduce using rule 19 (element_list -> expression .)
+    COMMA           reduce using rule 19 (element_list -> expression .)
+
+
+state 49
+
+    (26) parameter_list -> LOCAL_VAR .
+
+    R_PAREN         reduce using rule 26 (parameter_list -> LOCAL_VAR .)
+    COMMA           reduce using rule 26 (parameter_list -> LOCAL_VAR .)
+
+
+state 50
+
+    (25) function_definition -> DEF LOCAL_VAR L_PAREN parameter_list . R_PAREN statement_list END
+    (27) parameter_list -> parameter_list . COMMA LOCAL_VAR
+
+    R_PAREN         shift and go to state 59
+    COMMA           shift and go to state 60
+
+
+state 51
+
+    (28) parameter_list -> empty .
+
+    R_PAREN         reduce using rule 28 (parameter_list -> empty .)
+    COMMA           reduce using rule 28 (parameter_list -> empty .)
+
+
+state 52
+
+    (22) if_statement -> IF condition statement_list END .
+
+    PRINT           reduce using rule 22 (if_statement -> IF condition statement_list END .)
+    LOCAL_VAR       reduce using rule 22 (if_statement -> IF condition statement_list END .)
+    DEF             reduce using rule 22 (if_statement -> IF condition statement_list END .)
+    IF              reduce using rule 22 (if_statement -> IF condition statement_list END .)
+    $end            reduce using rule 22 (if_statement -> IF condition statement_list END .)
+    END             reduce using rule 22 (if_statement -> IF condition statement_list END .)
+    ELSE            reduce using rule 22 (if_statement -> IF condition statement_list END .)
+
+
+state 53
+
+    (23) if_statement -> IF condition statement_list ELSE . statement_list END
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement_list statement
+    (4) statement -> . print_statement
+    (5) statement -> . input_statement
+    (6) statement -> . data_structure
+    (7) statement -> . control_structure
+    (8) statement -> . function_definition
+    (9) print_statement -> . PRINT L_PAREN argument_list R_PAREN
+    (10) print_statement -> . PRINT L_PAREN R_PAREN
+    (11) print_statement -> . PRINT argument_list
+    (12) print_statement -> . PRINT
+    (15) input_statement -> . LOCAL_VAR ASSIGN GETS
+    (16) input_statement -> . LOCAL_VAR ASSIGN GETS DOT CHOMP
+    (17) data_structure -> . array_definition
+    (21) control_structure -> . if_statement
+    (25) function_definition -> . DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END
+    (18) array_definition -> . LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+    (22) if_statement -> . IF condition statement_list END
+    (23) if_statement -> . IF condition statement_list ELSE statement_list END
+
+    PRINT           shift and go to state 9
+    LOCAL_VAR       shift and go to state 10
+    DEF             shift and go to state 13
+    IF              shift and go to state 14
+
+    statement_list                 shift and go to state 61
+    statement                      shift and go to state 3
+    print_statement                shift and go to state 4
+    input_statement                shift and go to state 5
+    data_structure                 shift and go to state 6
+    control_structure              shift and go to state 7
+    function_definition            shift and go to state 8
+    array_definition               shift and go to state 11
+    if_statement                   shift and go to state 12
+
+state 54
+
+    (24) condition -> expression comparison_operator expression .
+
+    PRINT           reduce using rule 24 (condition -> expression comparison_operator expression .)
+    LOCAL_VAR       reduce using rule 24 (condition -> expression comparison_operator expression .)
+    DEF             reduce using rule 24 (condition -> expression comparison_operator expression .)
+    IF              reduce using rule 24 (condition -> expression comparison_operator expression .)
+
+
+state 55
+
+    (34) array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .
+
+    COMMA           reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    PRINT           reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    LOCAL_VAR       reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    DEF             reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    IF              reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    $end            reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    END             reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    ELSE            reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    EQUALS          reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    DIFFERENT       reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    LESS            reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    LESS_EQUAL      reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    GREATER         reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    GREATER_EQUAL   reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    R_PAREN         reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    R_ULTRA_PAREN   reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+
+
+state 56
+
+    (16) input_statement -> LOCAL_VAR ASSIGN GETS DOT CHOMP .
+
+    PRINT           reduce using rule 16 (input_statement -> LOCAL_VAR ASSIGN GETS DOT CHOMP .)
+    LOCAL_VAR       reduce using rule 16 (input_statement -> LOCAL_VAR ASSIGN GETS DOT CHOMP .)
+    DEF             reduce using rule 16 (input_statement -> LOCAL_VAR ASSIGN GETS DOT CHOMP .)
+    IF              reduce using rule 16 (input_statement -> LOCAL_VAR ASSIGN GETS DOT CHOMP .)
+    $end            reduce using rule 16 (input_statement -> LOCAL_VAR ASSIGN GETS DOT CHOMP .)
+    END             reduce using rule 16 (input_statement -> LOCAL_VAR ASSIGN GETS DOT CHOMP .)
+    ELSE            reduce using rule 16 (input_statement -> LOCAL_VAR ASSIGN GETS DOT CHOMP .)
+
+
+state 57
+
+    (18) array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN .
+
+    PRINT           reduce using rule 18 (array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN .)
+    LOCAL_VAR       reduce using rule 18 (array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN .)
+    DEF             reduce using rule 18 (array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN .)
+    IF              reduce using rule 18 (array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN .)
+    $end            reduce using rule 18 (array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN .)
+    END             reduce using rule 18 (array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN .)
+    ELSE            reduce using rule 18 (array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN .)
+
+
+state 58
+
+    (20) element_list -> element_list COMMA . expression
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    expression                     shift and go to state 62
+    array_access                   shift and go to state 23
+
+state 59
+
+    (25) function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN . statement_list END
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement_list statement
+    (4) statement -> . print_statement
+    (5) statement -> . input_statement
+    (6) statement -> . data_structure
+    (7) statement -> . control_structure
+    (8) statement -> . function_definition
+    (9) print_statement -> . PRINT L_PAREN argument_list R_PAREN
+    (10) print_statement -> . PRINT L_PAREN R_PAREN
+    (11) print_statement -> . PRINT argument_list
+    (12) print_statement -> . PRINT
+    (15) input_statement -> . LOCAL_VAR ASSIGN GETS
+    (16) input_statement -> . LOCAL_VAR ASSIGN GETS DOT CHOMP
+    (17) data_structure -> . array_definition
+    (21) control_structure -> . if_statement
+    (25) function_definition -> . DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END
+    (18) array_definition -> . LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+    (22) if_statement -> . IF condition statement_list END
+    (23) if_statement -> . IF condition statement_list ELSE statement_list END
+
+    PRINT           shift and go to state 9
+    LOCAL_VAR       shift and go to state 10
+    DEF             shift and go to state 13
+    IF              shift and go to state 14
+
+    statement_list                 shift and go to state 63
+    statement                      shift and go to state 3
+    print_statement                shift and go to state 4
+    input_statement                shift and go to state 5
+    data_structure                 shift and go to state 6
+    control_structure              shift and go to state 7
+    function_definition            shift and go to state 8
+    array_definition               shift and go to state 11
+    if_statement                   shift and go to state 12
+
+state 60
+
+    (27) parameter_list -> parameter_list COMMA . LOCAL_VAR
+
+    LOCAL_VAR       shift and go to state 64
+
+
+state 61
+
+    (23) if_statement -> IF condition statement_list ELSE statement_list . END
+    (3) statement_list -> statement_list . statement
+    (4) statement -> . print_statement
+    (5) statement -> . input_statement
+    (6) statement -> . data_structure
+    (7) statement -> . control_structure
+    (8) statement -> . function_definition
+    (9) print_statement -> . PRINT L_PAREN argument_list R_PAREN
+    (10) print_statement -> . PRINT L_PAREN R_PAREN
+    (11) print_statement -> . PRINT argument_list
+    (12) print_statement -> . PRINT
+    (15) input_statement -> . LOCAL_VAR ASSIGN GETS
+    (16) input_statement -> . LOCAL_VAR ASSIGN GETS DOT CHOMP
+    (17) data_structure -> . array_definition
+    (21) control_structure -> . if_statement
+    (25) function_definition -> . DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END
+    (18) array_definition -> . LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+    (22) if_statement -> . IF condition statement_list END
+    (23) if_statement -> . IF condition statement_list ELSE statement_list END
+
+    END             shift and go to state 65
+    PRINT           shift and go to state 9
+    LOCAL_VAR       shift and go to state 10
+    DEF             shift and go to state 13
+    IF              shift and go to state 14
+
+    statement                      shift and go to state 15
+    print_statement                shift and go to state 4
+    input_statement                shift and go to state 5
+    data_structure                 shift and go to state 6
+    control_structure              shift and go to state 7
+    function_definition            shift and go to state 8
+    array_definition               shift and go to state 11
+    if_statement                   shift and go to state 12
+
+state 62
+
+    (20) element_list -> element_list COMMA expression .
+
+    R_ULTRA_PAREN   reduce using rule 20 (element_list -> element_list COMMA expression .)
+    COMMA           reduce using rule 20 (element_list -> element_list COMMA expression .)
+
+
+state 63
+
+    (25) function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list . END
+    (3) statement_list -> statement_list . statement
+    (4) statement -> . print_statement
+    (5) statement -> . input_statement
+    (6) statement -> . data_structure
+    (7) statement -> . control_structure
+    (8) statement -> . function_definition
+    (9) print_statement -> . PRINT L_PAREN argument_list R_PAREN
+    (10) print_statement -> . PRINT L_PAREN R_PAREN
+    (11) print_statement -> . PRINT argument_list
+    (12) print_statement -> . PRINT
+    (15) input_statement -> . LOCAL_VAR ASSIGN GETS
+    (16) input_statement -> . LOCAL_VAR ASSIGN GETS DOT CHOMP
+    (17) data_structure -> . array_definition
+    (21) control_structure -> . if_statement
+    (25) function_definition -> . DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END
+    (18) array_definition -> . LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+    (22) if_statement -> . IF condition statement_list END
+    (23) if_statement -> . IF condition statement_list ELSE statement_list END
+
+    END             shift and go to state 66
+    PRINT           shift and go to state 9
+    LOCAL_VAR       shift and go to state 10
+    DEF             shift and go to state 13
+    IF              shift and go to state 14
+
+    statement                      shift and go to state 15
+    print_statement                shift and go to state 4
+    input_statement                shift and go to state 5
+    data_structure                 shift and go to state 6
+    control_structure              shift and go to state 7
+    function_definition            shift and go to state 8
+    array_definition               shift and go to state 11
+    if_statement                   shift and go to state 12
+
+state 64
+
+    (27) parameter_list -> parameter_list COMMA LOCAL_VAR .
+
+    R_PAREN         reduce using rule 27 (parameter_list -> parameter_list COMMA LOCAL_VAR .)
+    COMMA           reduce using rule 27 (parameter_list -> parameter_list COMMA LOCAL_VAR .)
+
+
+state 65
+
+    (23) if_statement -> IF condition statement_list ELSE statement_list END .
+
+    PRINT           reduce using rule 23 (if_statement -> IF condition statement_list ELSE statement_list END .)
+    LOCAL_VAR       reduce using rule 23 (if_statement -> IF condition statement_list ELSE statement_list END .)
+    DEF             reduce using rule 23 (if_statement -> IF condition statement_list ELSE statement_list END .)
+    IF              reduce using rule 23 (if_statement -> IF condition statement_list ELSE statement_list END .)
+    $end            reduce using rule 23 (if_statement -> IF condition statement_list ELSE statement_list END .)
+    END             reduce using rule 23 (if_statement -> IF condition statement_list ELSE statement_list END .)
+    ELSE            reduce using rule 23 (if_statement -> IF condition statement_list ELSE statement_list END .)
+
+
+state 66
+
+    (25) function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END .
+
+    PRINT           reduce using rule 25 (function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END .)
+    LOCAL_VAR       reduce using rule 25 (function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END .)
+    DEF             reduce using rule 25 (function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END .)
+    IF              reduce using rule 25 (function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END .)
+    $end            reduce using rule 25 (function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END .)
+    END             reduce using rule 25 (function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END .)
+    ELSE            reduce using rule 25 (function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for LOCAL_VAR in state 9 resolved as shift

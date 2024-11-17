@@ -1,0 +1,8 @@
+Analizador sintactico:
+None
+
+Errores:
+Syntax error at token 'class'
+Syntax error at token '{'
+Syntax error at token '>='
+Syntax error at token '>='

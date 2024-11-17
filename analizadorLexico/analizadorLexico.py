@@ -4,6 +4,9 @@ import errorList as errorList
 #reserved words
 reserved = {
     #Aporte de César Arana
+    'print': 'PRINT',
+    'gets': 'GETS',
+    'then': 'THEN',
     'if': 'IF',
     'else': 'ELSE',
     'elsif': 'ELSIF',
@@ -12,6 +15,8 @@ reserved = {
     'class': 'CLASS',
     'begin': 'BEGIN',
     'end': 'END',
+    'puts': 'PUTS',
+    'chomp': 'CHOMP',
     # Aporte de Johann Ramírez
     'unless': 'UNLESS',  
     'until': 'UNTIL',   
@@ -35,7 +40,14 @@ tokens = (
     'STRING',           # Cadenas de texto
     'PLUS', 'MINUS',    # Operadores aritméticos
     'GREATER',          # Operador de comparación '>'
-    'EQUAL',            # Operador de asignación o comparación '='
+    'LESS',             # Operador de comparación '<'
+    'ASSIGN',            # Operador de asignación '='
+    'EQUALS',           # Operador de comparación '=='
+    'DIFFERENT',        # Operador de comparación '!='
+    'GREATER_EQUAL',    # Operador de comparación '>='
+    'LESS_EQUAL',       # Operador de comparación '<='
+    'DOT',              # Punto .
+    
 
     # Aporte de Luis Inga
     'COMMA',
@@ -53,7 +65,7 @@ tokens = (
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_GREATER = r'>'
-t_EQUAL = r'='
+t_ASSIGN = r'='
 t_COMMA = r','
 t_L_PAREN = r'\('
 t_R_PAREN = r'\)'
@@ -63,8 +75,22 @@ t_L_ULTRA_PAREN = r'\['
 t_R_ULTRA_PAREN = r']'
 t_TWO_POINTS = r':'
 t_HASHARROW = r'=>'
+t_EQUALS = r'=='
+t_DIFFERENT = r'!='
+t_GREATER_EQUAL = r'>='
+t_LESS_EQUAL = r'<='
+t_LESS = r'<'
+t_DOT = r'\.'
 
 # Definición de expresiones regulares para tokens complejos
+def t_PRINT(t):
+    r'print'
+    return t
+
+def t_PUTS(t):
+    r'puts'
+    return t
+
 def t_GLOBAL_VAR(t):
     r'\$[a-zA-Z_]\w*'
     return t
@@ -123,7 +149,7 @@ def t_newline(t):
 def t_error(t):
     line = t.lineno
     position = t.lexpos - t.lexer.lexdata.rfind("\n", 0, t.lexpos)
-    errorList.errores.append(f"Illegal character ('{t.value[0]}',{line},{position})")
+    errorList.erroresLexicos.append(f"Illegal character ('{t.value[0]}',{line},{position})")
     t.lexer.skip(1)
 
 # Construir el analizador léxico

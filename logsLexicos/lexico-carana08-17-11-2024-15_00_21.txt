@@ -1,0 +1,6 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'var',1,0)
+LexToken(ASSIGN,'=',1,4)
+LexToken(LOCAL_VAR,'gots',1,6)
+LexToken(DOT,'.',1,10)
+LexToken(CHOMP,'chomp',1,11)

@@ -1,1 +1,2 @@
-errores = []
+erroresSintacticos = []
+erroresLexicos = []

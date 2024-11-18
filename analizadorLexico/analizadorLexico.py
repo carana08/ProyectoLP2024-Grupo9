@@ -59,6 +59,10 @@ tokens = (
     'R_ULTRA_PAREN',
     'TWO_POINTS',
     'HASHARROW',
+
+    #Aporte Johann Ramírez
+
+    'MODULE'          # Operador de módulo
 )+tuple(reserved.values())
 
 #Tokens para expresiones regulares
@@ -81,6 +85,7 @@ t_GREATER_EQUAL = r'>='
 t_LESS_EQUAL = r'<='
 t_LESS = r'<'
 t_DOT = r'\.'
+t_MODULO = r'%'  
 
 # Definición de expresiones regulares para tokens complejos
 def t_PRINT(t):

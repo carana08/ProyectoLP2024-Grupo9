@@ -1,0 +1,7 @@
+Analizador sintactico:
+None
+
+Errores:
+Syntax error at token 'unless'
+Syntax error at token 'end'
+Syntax error at token 'puts'

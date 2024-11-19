@@ -1,0 +1,6 @@
+Analizador sintactico:
+None
+
+Errores:
+Syntax error at token '+'
+Syntax error at token 'puts'

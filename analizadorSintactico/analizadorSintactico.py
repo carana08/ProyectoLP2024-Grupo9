@@ -16,10 +16,17 @@ def p_statement_list(p):
 # Regla general para las sentencias
 def p_statement(p):
     '''statement : print_statement
+                 | puts_statement
                  | input_statement
+                 | assignment_statement
                  | data_structure
                  | control_structure
                  | function_definition'''
+    pass
+
+# Regla para la asignación
+def p_assignment_statement(p):
+    '''assignment_statement : LOCAL_VAR ASSIGN expression'''
     pass
 
 # Regla para la sentencia de impresión
@@ -28,6 +35,14 @@ def p_print_statement(p):
                        | PRINT L_PAREN R_PAREN 
                        | PRINT argument_list
                        | PRINT'''
+    pass
+
+# Regla para la sentencia de impresión (puts)
+def p_puts_statement(p):
+    '''puts_statement : PUTS L_PAREN argument_list R_PAREN
+                     | PUTS L_PAREN R_PAREN 
+                     | PUTS argument_list
+                     | PUTS'''
     pass
 
 # Regla para la lista de argumentos (en la sentencia print)
@@ -60,13 +75,25 @@ def p_element_list(p):
 
 # Definición de estructuras de control
 def p_control_structure(p):
-    '''control_structure : if_statement'''
+    '''control_structure : if_statement
+                         | until_statement
+                         | unless_statement'''
     pass
 
 # Estructura condicional if-else
 def p_if_statement(p):
     '''if_statement : IF condition statement_list END
                     | IF condition statement_list ELSE statement_list END'''
+    pass
+
+def p_unless_statement(p):
+    '''unless_statement : UNLESS condition statement_list END
+                        | UNLESS condition statement_list ELSE statement_list END'''
+    pass
+
+# Estructura de control until
+def p_until_statement(p):
+    '''until_statement : UNTIL condition statement_list END'''
     pass
 
 # Definición de la condición (expresión booleana)

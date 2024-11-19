@@ -92,7 +92,13 @@ def p_expression(p):
                   | FLOAT
                   | STRING
                   | LOCAL_VAR
-                  | array_access'''
+                  | array_access
+                  | expression PLUS expression
+                  | expression MINUS expression
+                  | expression MULTIPLY expression
+                  | expression DIVIDE expression
+                  | expression MODULE expression
+                  | expression comparison_operator expression'''
     pass
 
 # Definición de acceso a elementos de arreglo

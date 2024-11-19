@@ -11,9 +11,7 @@ Unused terminals:
     HASHARROW
     INSTANCE_VAR
     L_MAYUS_PAREN
-    MINUS
     NIL
-    PLUS
     PUTS
     R_MAYUS_PAREN
     THEN
@@ -59,14 +57,20 @@ Rule 30    expression -> FLOAT
 Rule 31    expression -> STRING
 Rule 32    expression -> LOCAL_VAR
 Rule 33    expression -> array_access
-Rule 34    array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
-Rule 35    comparison_operator -> EQUALS
-Rule 36    comparison_operator -> DIFFERENT
-Rule 37    comparison_operator -> LESS
-Rule 38    comparison_operator -> LESS_EQUAL
-Rule 39    comparison_operator -> GREATER
-Rule 40    comparison_operator -> GREATER_EQUAL
-Rule 41    empty -> <empty>
+Rule 34    expression -> expression PLUS expression
+Rule 35    expression -> expression MINUS expression
+Rule 36    expression -> expression MULTIPLY expression
+Rule 37    expression -> expression DIVIDE expression
+Rule 38    expression -> expression MODULE expression
+Rule 39    expression -> expression comparison_operator expression
+Rule 40    array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+Rule 41    comparison_operator -> EQUALS
+Rule 42    comparison_operator -> DIFFERENT
+Rule 43    comparison_operator -> LESS
+Rule 44    comparison_operator -> LESS_EQUAL
+Rule 45    comparison_operator -> GREATER
+Rule 46    comparison_operator -> GREATER_EQUAL
+Rule 47    empty -> <empty>
 
 Terminals, with rules where they appear
 
@@ -78,35 +82,38 @@ CLASS_VAR            :
 COMMA                : 14 20 27
 CONSTANT             : 
 DEF                  : 25
-DIFFERENT            : 36
+DIFFERENT            : 42
+DIVIDE               : 37
 DOT                  : 16
 ELSE                 : 23
 ELSIF                : 
 END                  : 22 23 25
-EQUALS               : 35
+EQUALS               : 41
 FLOAT                : 30
 GETS                 : 15 16
 GLOBAL_VAR           : 
-GREATER              : 39
-GREATER_EQUAL        : 40
+GREATER              : 45
+GREATER_EQUAL        : 46
 HASHARROW            : 
 IF                   : 22 23
 INSTANCE_VAR         : 
 INTEGER              : 29
-LESS                 : 37
-LESS_EQUAL           : 38
-LOCAL_VAR            : 15 16 18 25 26 27 32 34
+LESS                 : 43
+LESS_EQUAL           : 44
+LOCAL_VAR            : 15 16 18 25 26 27 32 40
 L_MAYUS_PAREN        : 
 L_PAREN              : 9 10 25
-L_ULTRA_PAREN        : 18 34
-MINUS                : 
+L_ULTRA_PAREN        : 18 40
+MINUS                : 35
+MODULE               : 38
+MULTIPLY             : 36
 NIL                  : 
-PLUS                 : 
+PLUS                 : 34
 PRINT                : 9 10 11 12
 PUTS                 : 
 R_MAYUS_PAREN        : 
 R_PAREN              : 9 10 25
-R_ULTRA_PAREN        : 18 34
+R_ULTRA_PAREN        : 18 40
 STRING               : 31
 THEN                 : 
 TWO_POINTS           : 
@@ -121,13 +128,13 @@ Nonterminals, with rules where they appear
 argument_list        : 9 11 14
 array_access         : 33
 array_definition     : 17
-comparison_operator  : 24
+comparison_operator  : 24 39
 condition            : 22 23
 control_structure    : 7
 data_structure       : 6
 element_list         : 18 20
 empty                : 28
-expression           : 13 14 19 20 24 24 34
+expression           : 13 14 19 20 24 24 34 34 35 35 36 36 37 37 38 38 39 39 40
 function_definition  : 8
 if_statement         : 21
 input_statement      : 5
@@ -313,7 +320,13 @@ state 9
     (31) expression -> . STRING
     (32) expression -> . LOCAL_VAR
     (33) expression -> . array_access
-    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
 
   ! shift/reduce conflict for LOCAL_VAR resolved as shift
     L_PAREN         shift and go to state 16
@@ -386,7 +399,13 @@ state 14
     (31) expression -> . STRING
     (32) expression -> . LOCAL_VAR
     (33) expression -> . array_access
-    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
 
     INTEGER         shift and go to state 19
     FLOAT           shift and go to state 20
@@ -421,7 +440,13 @@ state 16
     (31) expression -> . STRING
     (32) expression -> . LOCAL_VAR
     (33) expression -> . array_access
-    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
 
     R_PAREN         shift and go to state 29
     INTEGER         shift and go to state 19
@@ -451,6 +476,18 @@ state 17
 state 18
 
     (13) argument_list -> expression .
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
 
     COMMA           reduce using rule 13 (argument_list -> expression .)
     PRINT           reduce using rule 13 (argument_list -> expression .)
@@ -461,12 +498,35 @@ state 18
     END             reduce using rule 13 (argument_list -> expression .)
     ELSE            reduce using rule 13 (argument_list -> expression .)
     R_PAREN         reduce using rule 13 (argument_list -> expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
 
+    comparison_operator            shift and go to state 36
 
 state 19
 
     (29) expression -> INTEGER .
 
+    PLUS            reduce using rule 29 (expression -> INTEGER .)
+    MINUS           reduce using rule 29 (expression -> INTEGER .)
+    MULTIPLY        reduce using rule 29 (expression -> INTEGER .)
+    DIVIDE          reduce using rule 29 (expression -> INTEGER .)
+    MODULE          reduce using rule 29 (expression -> INTEGER .)
+    EQUALS          reduce using rule 29 (expression -> INTEGER .)
+    DIFFERENT       reduce using rule 29 (expression -> INTEGER .)
+    LESS            reduce using rule 29 (expression -> INTEGER .)
+    LESS_EQUAL      reduce using rule 29 (expression -> INTEGER .)
+    GREATER         reduce using rule 29 (expression -> INTEGER .)
+    GREATER_EQUAL   reduce using rule 29 (expression -> INTEGER .)
     COMMA           reduce using rule 29 (expression -> INTEGER .)
     PRINT           reduce using rule 29 (expression -> INTEGER .)
     LOCAL_VAR       reduce using rule 29 (expression -> INTEGER .)
@@ -475,12 +535,6 @@ state 19
     $end            reduce using rule 29 (expression -> INTEGER .)
     END             reduce using rule 29 (expression -> INTEGER .)
     ELSE            reduce using rule 29 (expression -> INTEGER .)
-    EQUALS          reduce using rule 29 (expression -> INTEGER .)
-    DIFFERENT       reduce using rule 29 (expression -> INTEGER .)
-    LESS            reduce using rule 29 (expression -> INTEGER .)
-    LESS_EQUAL      reduce using rule 29 (expression -> INTEGER .)
-    GREATER         reduce using rule 29 (expression -> INTEGER .)
-    GREATER_EQUAL   reduce using rule 29 (expression -> INTEGER .)
     R_PAREN         reduce using rule 29 (expression -> INTEGER .)
     R_ULTRA_PAREN   reduce using rule 29 (expression -> INTEGER .)
 
@@ -489,6 +543,17 @@ state 20
 
     (30) expression -> FLOAT .
 
+    PLUS            reduce using rule 30 (expression -> FLOAT .)
+    MINUS           reduce using rule 30 (expression -> FLOAT .)
+    MULTIPLY        reduce using rule 30 (expression -> FLOAT .)
+    DIVIDE          reduce using rule 30 (expression -> FLOAT .)
+    MODULE          reduce using rule 30 (expression -> FLOAT .)
+    EQUALS          reduce using rule 30 (expression -> FLOAT .)
+    DIFFERENT       reduce using rule 30 (expression -> FLOAT .)
+    LESS            reduce using rule 30 (expression -> FLOAT .)
+    LESS_EQUAL      reduce using rule 30 (expression -> FLOAT .)
+    GREATER         reduce using rule 30 (expression -> FLOAT .)
+    GREATER_EQUAL   reduce using rule 30 (expression -> FLOAT .)
     COMMA           reduce using rule 30 (expression -> FLOAT .)
     PRINT           reduce using rule 30 (expression -> FLOAT .)
     LOCAL_VAR       reduce using rule 30 (expression -> FLOAT .)
@@ -497,12 +562,6 @@ state 20
     $end            reduce using rule 30 (expression -> FLOAT .)
     END             reduce using rule 30 (expression -> FLOAT .)
     ELSE            reduce using rule 30 (expression -> FLOAT .)
-    EQUALS          reduce using rule 30 (expression -> FLOAT .)
-    DIFFERENT       reduce using rule 30 (expression -> FLOAT .)
-    LESS            reduce using rule 30 (expression -> FLOAT .)
-    LESS_EQUAL      reduce using rule 30 (expression -> FLOAT .)
-    GREATER         reduce using rule 30 (expression -> FLOAT .)
-    GREATER_EQUAL   reduce using rule 30 (expression -> FLOAT .)
     R_PAREN         reduce using rule 30 (expression -> FLOAT .)
     R_ULTRA_PAREN   reduce using rule 30 (expression -> FLOAT .)
 
@@ -511,6 +570,17 @@ state 21
 
     (31) expression -> STRING .
 
+    PLUS            reduce using rule 31 (expression -> STRING .)
+    MINUS           reduce using rule 31 (expression -> STRING .)
+    MULTIPLY        reduce using rule 31 (expression -> STRING .)
+    DIVIDE          reduce using rule 31 (expression -> STRING .)
+    MODULE          reduce using rule 31 (expression -> STRING .)
+    EQUALS          reduce using rule 31 (expression -> STRING .)
+    DIFFERENT       reduce using rule 31 (expression -> STRING .)
+    LESS            reduce using rule 31 (expression -> STRING .)
+    LESS_EQUAL      reduce using rule 31 (expression -> STRING .)
+    GREATER         reduce using rule 31 (expression -> STRING .)
+    GREATER_EQUAL   reduce using rule 31 (expression -> STRING .)
     COMMA           reduce using rule 31 (expression -> STRING .)
     PRINT           reduce using rule 31 (expression -> STRING .)
     LOCAL_VAR       reduce using rule 31 (expression -> STRING .)
@@ -519,12 +589,6 @@ state 21
     $end            reduce using rule 31 (expression -> STRING .)
     END             reduce using rule 31 (expression -> STRING .)
     ELSE            reduce using rule 31 (expression -> STRING .)
-    EQUALS          reduce using rule 31 (expression -> STRING .)
-    DIFFERENT       reduce using rule 31 (expression -> STRING .)
-    LESS            reduce using rule 31 (expression -> STRING .)
-    LESS_EQUAL      reduce using rule 31 (expression -> STRING .)
-    GREATER         reduce using rule 31 (expression -> STRING .)
-    GREATER_EQUAL   reduce using rule 31 (expression -> STRING .)
     R_PAREN         reduce using rule 31 (expression -> STRING .)
     R_ULTRA_PAREN   reduce using rule 31 (expression -> STRING .)
 
@@ -532,8 +596,19 @@ state 21
 state 22
 
     (32) expression -> LOCAL_VAR .
-    (34) array_access -> LOCAL_VAR . L_ULTRA_PAREN expression R_ULTRA_PAREN
+    (40) array_access -> LOCAL_VAR . L_ULTRA_PAREN expression R_ULTRA_PAREN
 
+    PLUS            reduce using rule 32 (expression -> LOCAL_VAR .)
+    MINUS           reduce using rule 32 (expression -> LOCAL_VAR .)
+    MULTIPLY        reduce using rule 32 (expression -> LOCAL_VAR .)
+    DIVIDE          reduce using rule 32 (expression -> LOCAL_VAR .)
+    MODULE          reduce using rule 32 (expression -> LOCAL_VAR .)
+    EQUALS          reduce using rule 32 (expression -> LOCAL_VAR .)
+    DIFFERENT       reduce using rule 32 (expression -> LOCAL_VAR .)
+    LESS            reduce using rule 32 (expression -> LOCAL_VAR .)
+    LESS_EQUAL      reduce using rule 32 (expression -> LOCAL_VAR .)
+    GREATER         reduce using rule 32 (expression -> LOCAL_VAR .)
+    GREATER_EQUAL   reduce using rule 32 (expression -> LOCAL_VAR .)
     COMMA           reduce using rule 32 (expression -> LOCAL_VAR .)
     PRINT           reduce using rule 32 (expression -> LOCAL_VAR .)
     LOCAL_VAR       reduce using rule 32 (expression -> LOCAL_VAR .)
@@ -542,21 +617,26 @@ state 22
     $end            reduce using rule 32 (expression -> LOCAL_VAR .)
     END             reduce using rule 32 (expression -> LOCAL_VAR .)
     ELSE            reduce using rule 32 (expression -> LOCAL_VAR .)
-    EQUALS          reduce using rule 32 (expression -> LOCAL_VAR .)
-    DIFFERENT       reduce using rule 32 (expression -> LOCAL_VAR .)
-    LESS            reduce using rule 32 (expression -> LOCAL_VAR .)
-    LESS_EQUAL      reduce using rule 32 (expression -> LOCAL_VAR .)
-    GREATER         reduce using rule 32 (expression -> LOCAL_VAR .)
-    GREATER_EQUAL   reduce using rule 32 (expression -> LOCAL_VAR .)
     R_PAREN         reduce using rule 32 (expression -> LOCAL_VAR .)
     R_ULTRA_PAREN   reduce using rule 32 (expression -> LOCAL_VAR .)
-    L_ULTRA_PAREN   shift and go to state 31
+    L_ULTRA_PAREN   shift and go to state 43
 
 
 state 23
 
     (33) expression -> array_access .
 
+    PLUS            reduce using rule 33 (expression -> array_access .)
+    MINUS           reduce using rule 33 (expression -> array_access .)
+    MULTIPLY        reduce using rule 33 (expression -> array_access .)
+    DIVIDE          reduce using rule 33 (expression -> array_access .)
+    MODULE          reduce using rule 33 (expression -> array_access .)
+    EQUALS          reduce using rule 33 (expression -> array_access .)
+    DIFFERENT       reduce using rule 33 (expression -> array_access .)
+    LESS            reduce using rule 33 (expression -> array_access .)
+    LESS_EQUAL      reduce using rule 33 (expression -> array_access .)
+    GREATER         reduce using rule 33 (expression -> array_access .)
+    GREATER_EQUAL   reduce using rule 33 (expression -> array_access .)
     COMMA           reduce using rule 33 (expression -> array_access .)
     PRINT           reduce using rule 33 (expression -> array_access .)
     LOCAL_VAR       reduce using rule 33 (expression -> array_access .)
@@ -565,12 +645,6 @@ state 23
     $end            reduce using rule 33 (expression -> array_access .)
     END             reduce using rule 33 (expression -> array_access .)
     ELSE            reduce using rule 33 (expression -> array_access .)
-    EQUALS          reduce using rule 33 (expression -> array_access .)
-    DIFFERENT       reduce using rule 33 (expression -> array_access .)
-    LESS            reduce using rule 33 (expression -> array_access .)
-    LESS_EQUAL      reduce using rule 33 (expression -> array_access .)
-    GREATER         reduce using rule 33 (expression -> array_access .)
-    GREATER_EQUAL   reduce using rule 33 (expression -> array_access .)
     R_PAREN         reduce using rule 33 (expression -> array_access .)
     R_ULTRA_PAREN   reduce using rule 33 (expression -> array_access .)
 
@@ -581,15 +655,15 @@ state 24
     (16) input_statement -> LOCAL_VAR ASSIGN . GETS DOT CHOMP
     (18) array_definition -> LOCAL_VAR ASSIGN . L_ULTRA_PAREN element_list R_ULTRA_PAREN
 
-    GETS            shift and go to state 32
-    L_ULTRA_PAREN   shift and go to state 33
+    GETS            shift and go to state 44
+    L_ULTRA_PAREN   shift and go to state 45
 
 
 state 25
 
     (25) function_definition -> DEF LOCAL_VAR . L_PAREN parameter_list R_PAREN statement_list END
 
-    L_PAREN         shift and go to state 34
+    L_PAREN         shift and go to state 46
 
 
 state 26
@@ -621,7 +695,7 @@ state 26
     DEF             shift and go to state 13
     IF              shift and go to state 14
 
-    statement_list                 shift and go to state 35
+    statement_list                 shift and go to state 47
     statement                      shift and go to state 3
     print_statement                shift and go to state 4
     input_statement                shift and go to state 5
@@ -634,13 +708,24 @@ state 26
 state 27
 
     (24) condition -> expression . comparison_operator expression
-    (35) comparison_operator -> . EQUALS
-    (36) comparison_operator -> . DIFFERENT
-    (37) comparison_operator -> . LESS
-    (38) comparison_operator -> . LESS_EQUAL
-    (39) comparison_operator -> . GREATER
-    (40) comparison_operator -> . GREATER_EQUAL
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
 
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
     EQUALS          shift and go to state 37
     DIFFERENT       shift and go to state 38
     LESS            shift and go to state 39
@@ -648,14 +733,14 @@ state 27
     GREATER         shift and go to state 41
     GREATER_EQUAL   shift and go to state 42
 
-    comparison_operator            shift and go to state 36
+    comparison_operator            shift and go to state 48
 
 state 28
 
     (9) print_statement -> PRINT L_PAREN argument_list . R_PAREN
     (14) argument_list -> argument_list . COMMA expression
 
-    R_PAREN         shift and go to state 43
+    R_PAREN         shift and go to state 49
     COMMA           shift and go to state 30
 
 
@@ -680,35 +765,251 @@ state 30
     (31) expression -> . STRING
     (32) expression -> . LOCAL_VAR
     (33) expression -> . array_access
-    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
 
     INTEGER         shift and go to state 19
     FLOAT           shift and go to state 20
     STRING          shift and go to state 21
     LOCAL_VAR       shift and go to state 22
 
-    expression                     shift and go to state 44
+    expression                     shift and go to state 50
     array_access                   shift and go to state 23
 
 state 31
 
-    (34) array_access -> LOCAL_VAR L_ULTRA_PAREN . expression R_ULTRA_PAREN
+    (34) expression -> expression PLUS . expression
     (29) expression -> . INTEGER
     (30) expression -> . FLOAT
     (31) expression -> . STRING
     (32) expression -> . LOCAL_VAR
     (33) expression -> . array_access
-    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
 
     INTEGER         shift and go to state 19
     FLOAT           shift and go to state 20
     STRING          shift and go to state 21
     LOCAL_VAR       shift and go to state 22
 
-    expression                     shift and go to state 45
+    expression                     shift and go to state 51
     array_access                   shift and go to state 23
 
 state 32
+
+    (35) expression -> expression MINUS . expression
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    expression                     shift and go to state 52
+    array_access                   shift and go to state 23
+
+state 33
+
+    (36) expression -> expression MULTIPLY . expression
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    expression                     shift and go to state 53
+    array_access                   shift and go to state 23
+
+state 34
+
+    (37) expression -> expression DIVIDE . expression
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    expression                     shift and go to state 54
+    array_access                   shift and go to state 23
+
+state 35
+
+    (38) expression -> expression MODULE . expression
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    expression                     shift and go to state 55
+    array_access                   shift and go to state 23
+
+state 36
+
+    (39) expression -> expression comparison_operator . expression
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    expression                     shift and go to state 56
+    array_access                   shift and go to state 23
+
+state 37
+
+    (41) comparison_operator -> EQUALS .
+
+    INTEGER         reduce using rule 41 (comparison_operator -> EQUALS .)
+    FLOAT           reduce using rule 41 (comparison_operator -> EQUALS .)
+    STRING          reduce using rule 41 (comparison_operator -> EQUALS .)
+    LOCAL_VAR       reduce using rule 41 (comparison_operator -> EQUALS .)
+
+
+state 38
+
+    (42) comparison_operator -> DIFFERENT .
+
+    INTEGER         reduce using rule 42 (comparison_operator -> DIFFERENT .)
+    FLOAT           reduce using rule 42 (comparison_operator -> DIFFERENT .)
+    STRING          reduce using rule 42 (comparison_operator -> DIFFERENT .)
+    LOCAL_VAR       reduce using rule 42 (comparison_operator -> DIFFERENT .)
+
+
+state 39
+
+    (43) comparison_operator -> LESS .
+
+    INTEGER         reduce using rule 43 (comparison_operator -> LESS .)
+    FLOAT           reduce using rule 43 (comparison_operator -> LESS .)
+    STRING          reduce using rule 43 (comparison_operator -> LESS .)
+    LOCAL_VAR       reduce using rule 43 (comparison_operator -> LESS .)
+
+
+state 40
+
+    (44) comparison_operator -> LESS_EQUAL .
+
+    INTEGER         reduce using rule 44 (comparison_operator -> LESS_EQUAL .)
+    FLOAT           reduce using rule 44 (comparison_operator -> LESS_EQUAL .)
+    STRING          reduce using rule 44 (comparison_operator -> LESS_EQUAL .)
+    LOCAL_VAR       reduce using rule 44 (comparison_operator -> LESS_EQUAL .)
+
+
+state 41
+
+    (45) comparison_operator -> GREATER .
+
+    INTEGER         reduce using rule 45 (comparison_operator -> GREATER .)
+    FLOAT           reduce using rule 45 (comparison_operator -> GREATER .)
+    STRING          reduce using rule 45 (comparison_operator -> GREATER .)
+    LOCAL_VAR       reduce using rule 45 (comparison_operator -> GREATER .)
+
+
+state 42
+
+    (46) comparison_operator -> GREATER_EQUAL .
+
+    INTEGER         reduce using rule 46 (comparison_operator -> GREATER_EQUAL .)
+    FLOAT           reduce using rule 46 (comparison_operator -> GREATER_EQUAL .)
+    STRING          reduce using rule 46 (comparison_operator -> GREATER_EQUAL .)
+    LOCAL_VAR       reduce using rule 46 (comparison_operator -> GREATER_EQUAL .)
+
+
+state 43
+
+    (40) array_access -> LOCAL_VAR L_ULTRA_PAREN . expression R_ULTRA_PAREN
+    (29) expression -> . INTEGER
+    (30) expression -> . FLOAT
+    (31) expression -> . STRING
+    (32) expression -> . LOCAL_VAR
+    (33) expression -> . array_access
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+
+    INTEGER         shift and go to state 19
+    FLOAT           shift and go to state 20
+    STRING          shift and go to state 21
+    LOCAL_VAR       shift and go to state 22
+
+    expression                     shift and go to state 57
+    array_access                   shift and go to state 23
+
+state 44
 
     (15) input_statement -> LOCAL_VAR ASSIGN GETS .
     (16) input_statement -> LOCAL_VAR ASSIGN GETS . DOT CHOMP
@@ -720,10 +1021,10 @@ state 32
     $end            reduce using rule 15 (input_statement -> LOCAL_VAR ASSIGN GETS .)
     END             reduce using rule 15 (input_statement -> LOCAL_VAR ASSIGN GETS .)
     ELSE            reduce using rule 15 (input_statement -> LOCAL_VAR ASSIGN GETS .)
-    DOT             shift and go to state 46
+    DOT             shift and go to state 58
 
 
-state 33
+state 45
 
     (18) array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN . element_list R_ULTRA_PAREN
     (19) element_list -> . expression
@@ -733,33 +1034,39 @@ state 33
     (31) expression -> . STRING
     (32) expression -> . LOCAL_VAR
     (33) expression -> . array_access
-    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
 
     INTEGER         shift and go to state 19
     FLOAT           shift and go to state 20
     STRING          shift and go to state 21
     LOCAL_VAR       shift and go to state 22
 
-    element_list                   shift and go to state 47
-    expression                     shift and go to state 48
+    element_list                   shift and go to state 59
+    expression                     shift and go to state 60
     array_access                   shift and go to state 23
 
-state 34
+state 46
 
     (25) function_definition -> DEF LOCAL_VAR L_PAREN . parameter_list R_PAREN statement_list END
     (26) parameter_list -> . LOCAL_VAR
     (27) parameter_list -> . parameter_list COMMA LOCAL_VAR
     (28) parameter_list -> . empty
-    (41) empty -> .
+    (47) empty -> .
 
-    LOCAL_VAR       shift and go to state 49
-    R_PAREN         reduce using rule 41 (empty -> .)
-    COMMA           reduce using rule 41 (empty -> .)
+    LOCAL_VAR       shift and go to state 61
+    R_PAREN         reduce using rule 47 (empty -> .)
+    COMMA           reduce using rule 47 (empty -> .)
 
-    parameter_list                 shift and go to state 50
-    empty                          shift and go to state 51
+    parameter_list                 shift and go to state 62
+    empty                          shift and go to state 63
 
-state 35
+state 47
 
     (22) if_statement -> IF condition statement_list . END
     (23) if_statement -> IF condition statement_list . ELSE statement_list END
@@ -782,8 +1089,8 @@ state 35
     (22) if_statement -> . IF condition statement_list END
     (23) if_statement -> . IF condition statement_list ELSE statement_list END
 
-    END             shift and go to state 52
-    ELSE            shift and go to state 53
+    END             shift and go to state 64
+    ELSE            shift and go to state 65
     PRINT           shift and go to state 9
     LOCAL_VAR       shift and go to state 10
     DEF             shift and go to state 13
@@ -798,85 +1105,32 @@ state 35
     array_definition               shift and go to state 11
     if_statement                   shift and go to state 12
 
-state 36
+state 48
 
     (24) condition -> expression comparison_operator . expression
+    (39) expression -> expression comparison_operator . expression
     (29) expression -> . INTEGER
     (30) expression -> . FLOAT
     (31) expression -> . STRING
     (32) expression -> . LOCAL_VAR
     (33) expression -> . array_access
-    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
 
     INTEGER         shift and go to state 19
     FLOAT           shift and go to state 20
     STRING          shift and go to state 21
     LOCAL_VAR       shift and go to state 22
 
-    expression                     shift and go to state 54
+    expression                     shift and go to state 66
     array_access                   shift and go to state 23
 
-state 37
-
-    (35) comparison_operator -> EQUALS .
-
-    INTEGER         reduce using rule 35 (comparison_operator -> EQUALS .)
-    FLOAT           reduce using rule 35 (comparison_operator -> EQUALS .)
-    STRING          reduce using rule 35 (comparison_operator -> EQUALS .)
-    LOCAL_VAR       reduce using rule 35 (comparison_operator -> EQUALS .)
-
-
-state 38
-
-    (36) comparison_operator -> DIFFERENT .
-
-    INTEGER         reduce using rule 36 (comparison_operator -> DIFFERENT .)
-    FLOAT           reduce using rule 36 (comparison_operator -> DIFFERENT .)
-    STRING          reduce using rule 36 (comparison_operator -> DIFFERENT .)
-    LOCAL_VAR       reduce using rule 36 (comparison_operator -> DIFFERENT .)
-
-
-state 39
-
-    (37) comparison_operator -> LESS .
-
-    INTEGER         reduce using rule 37 (comparison_operator -> LESS .)
-    FLOAT           reduce using rule 37 (comparison_operator -> LESS .)
-    STRING          reduce using rule 37 (comparison_operator -> LESS .)
-    LOCAL_VAR       reduce using rule 37 (comparison_operator -> LESS .)
-
-
-state 40
-
-    (38) comparison_operator -> LESS_EQUAL .
-
-    INTEGER         reduce using rule 38 (comparison_operator -> LESS_EQUAL .)
-    FLOAT           reduce using rule 38 (comparison_operator -> LESS_EQUAL .)
-    STRING          reduce using rule 38 (comparison_operator -> LESS_EQUAL .)
-    LOCAL_VAR       reduce using rule 38 (comparison_operator -> LESS_EQUAL .)
-
-
-state 41
-
-    (39) comparison_operator -> GREATER .
-
-    INTEGER         reduce using rule 39 (comparison_operator -> GREATER .)
-    FLOAT           reduce using rule 39 (comparison_operator -> GREATER .)
-    STRING          reduce using rule 39 (comparison_operator -> GREATER .)
-    LOCAL_VAR       reduce using rule 39 (comparison_operator -> GREATER .)
-
-
-state 42
-
-    (40) comparison_operator -> GREATER_EQUAL .
-
-    INTEGER         reduce using rule 40 (comparison_operator -> GREATER_EQUAL .)
-    FLOAT           reduce using rule 40 (comparison_operator -> GREATER_EQUAL .)
-    STRING          reduce using rule 40 (comparison_operator -> GREATER_EQUAL .)
-    LOCAL_VAR       reduce using rule 40 (comparison_operator -> GREATER_EQUAL .)
-
-
-state 43
+state 49
 
     (9) print_statement -> PRINT L_PAREN argument_list R_PAREN .
 
@@ -889,9 +1143,21 @@ state 43
     ELSE            reduce using rule 9 (print_statement -> PRINT L_PAREN argument_list R_PAREN .)
 
 
-state 44
+state 50
 
     (14) argument_list -> argument_list COMMA expression .
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
 
     COMMA           reduce using rule 14 (argument_list -> argument_list COMMA expression .)
     PRINT           reduce using rule 14 (argument_list -> argument_list COMMA expression .)
@@ -902,40 +1168,478 @@ state 44
     END             reduce using rule 14 (argument_list -> argument_list COMMA expression .)
     ELSE            reduce using rule 14 (argument_list -> argument_list COMMA expression .)
     R_PAREN         reduce using rule 14 (argument_list -> argument_list COMMA expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
 
+    comparison_operator            shift and go to state 36
 
-state 45
+state 51
 
-    (34) array_access -> LOCAL_VAR L_ULTRA_PAREN expression . R_ULTRA_PAREN
+    (34) expression -> expression PLUS expression .
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
 
-    R_ULTRA_PAREN   shift and go to state 55
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTIPLY resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for MODULE resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for LESS_EQUAL resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for GREATER_EQUAL resolved as shift
+    COMMA           reduce using rule 34 (expression -> expression PLUS expression .)
+    PRINT           reduce using rule 34 (expression -> expression PLUS expression .)
+    LOCAL_VAR       reduce using rule 34 (expression -> expression PLUS expression .)
+    DEF             reduce using rule 34 (expression -> expression PLUS expression .)
+    IF              reduce using rule 34 (expression -> expression PLUS expression .)
+    $end            reduce using rule 34 (expression -> expression PLUS expression .)
+    END             reduce using rule 34 (expression -> expression PLUS expression .)
+    ELSE            reduce using rule 34 (expression -> expression PLUS expression .)
+    R_PAREN         reduce using rule 34 (expression -> expression PLUS expression .)
+    R_ULTRA_PAREN   reduce using rule 34 (expression -> expression PLUS expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
 
+  ! PLUS            [ reduce using rule 34 (expression -> expression PLUS expression .) ]
+  ! MINUS           [ reduce using rule 34 (expression -> expression PLUS expression .) ]
+  ! MULTIPLY        [ reduce using rule 34 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 34 (expression -> expression PLUS expression .) ]
+  ! MODULE          [ reduce using rule 34 (expression -> expression PLUS expression .) ]
+  ! EQUALS          [ reduce using rule 34 (expression -> expression PLUS expression .) ]
+  ! DIFFERENT       [ reduce using rule 34 (expression -> expression PLUS expression .) ]
+  ! LESS            [ reduce using rule 34 (expression -> expression PLUS expression .) ]
+  ! LESS_EQUAL      [ reduce using rule 34 (expression -> expression PLUS expression .) ]
+  ! GREATER         [ reduce using rule 34 (expression -> expression PLUS expression .) ]
+  ! GREATER_EQUAL   [ reduce using rule 34 (expression -> expression PLUS expression .) ]
 
-state 46
+    comparison_operator            shift and go to state 36
+
+state 52
+
+    (35) expression -> expression MINUS expression .
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTIPLY resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for MODULE resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for LESS_EQUAL resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for GREATER_EQUAL resolved as shift
+    COMMA           reduce using rule 35 (expression -> expression MINUS expression .)
+    PRINT           reduce using rule 35 (expression -> expression MINUS expression .)
+    LOCAL_VAR       reduce using rule 35 (expression -> expression MINUS expression .)
+    DEF             reduce using rule 35 (expression -> expression MINUS expression .)
+    IF              reduce using rule 35 (expression -> expression MINUS expression .)
+    $end            reduce using rule 35 (expression -> expression MINUS expression .)
+    END             reduce using rule 35 (expression -> expression MINUS expression .)
+    ELSE            reduce using rule 35 (expression -> expression MINUS expression .)
+    R_PAREN         reduce using rule 35 (expression -> expression MINUS expression .)
+    R_ULTRA_PAREN   reduce using rule 35 (expression -> expression MINUS expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
+
+  ! PLUS            [ reduce using rule 35 (expression -> expression MINUS expression .) ]
+  ! MINUS           [ reduce using rule 35 (expression -> expression MINUS expression .) ]
+  ! MULTIPLY        [ reduce using rule 35 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 35 (expression -> expression MINUS expression .) ]
+  ! MODULE          [ reduce using rule 35 (expression -> expression MINUS expression .) ]
+  ! EQUALS          [ reduce using rule 35 (expression -> expression MINUS expression .) ]
+  ! DIFFERENT       [ reduce using rule 35 (expression -> expression MINUS expression .) ]
+  ! LESS            [ reduce using rule 35 (expression -> expression MINUS expression .) ]
+  ! LESS_EQUAL      [ reduce using rule 35 (expression -> expression MINUS expression .) ]
+  ! GREATER         [ reduce using rule 35 (expression -> expression MINUS expression .) ]
+  ! GREATER_EQUAL   [ reduce using rule 35 (expression -> expression MINUS expression .) ]
+
+    comparison_operator            shift and go to state 36
+
+state 53
+
+    (36) expression -> expression MULTIPLY expression .
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTIPLY resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for MODULE resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for LESS_EQUAL resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for GREATER_EQUAL resolved as shift
+    COMMA           reduce using rule 36 (expression -> expression MULTIPLY expression .)
+    PRINT           reduce using rule 36 (expression -> expression MULTIPLY expression .)
+    LOCAL_VAR       reduce using rule 36 (expression -> expression MULTIPLY expression .)
+    DEF             reduce using rule 36 (expression -> expression MULTIPLY expression .)
+    IF              reduce using rule 36 (expression -> expression MULTIPLY expression .)
+    $end            reduce using rule 36 (expression -> expression MULTIPLY expression .)
+    END             reduce using rule 36 (expression -> expression MULTIPLY expression .)
+    ELSE            reduce using rule 36 (expression -> expression MULTIPLY expression .)
+    R_PAREN         reduce using rule 36 (expression -> expression MULTIPLY expression .)
+    R_ULTRA_PAREN   reduce using rule 36 (expression -> expression MULTIPLY expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
+
+  ! PLUS            [ reduce using rule 36 (expression -> expression MULTIPLY expression .) ]
+  ! MINUS           [ reduce using rule 36 (expression -> expression MULTIPLY expression .) ]
+  ! MULTIPLY        [ reduce using rule 36 (expression -> expression MULTIPLY expression .) ]
+  ! DIVIDE          [ reduce using rule 36 (expression -> expression MULTIPLY expression .) ]
+  ! MODULE          [ reduce using rule 36 (expression -> expression MULTIPLY expression .) ]
+  ! EQUALS          [ reduce using rule 36 (expression -> expression MULTIPLY expression .) ]
+  ! DIFFERENT       [ reduce using rule 36 (expression -> expression MULTIPLY expression .) ]
+  ! LESS            [ reduce using rule 36 (expression -> expression MULTIPLY expression .) ]
+  ! LESS_EQUAL      [ reduce using rule 36 (expression -> expression MULTIPLY expression .) ]
+  ! GREATER         [ reduce using rule 36 (expression -> expression MULTIPLY expression .) ]
+  ! GREATER_EQUAL   [ reduce using rule 36 (expression -> expression MULTIPLY expression .) ]
+
+    comparison_operator            shift and go to state 36
+
+state 54
+
+    (37) expression -> expression DIVIDE expression .
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTIPLY resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for MODULE resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for LESS_EQUAL resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for GREATER_EQUAL resolved as shift
+    COMMA           reduce using rule 37 (expression -> expression DIVIDE expression .)
+    PRINT           reduce using rule 37 (expression -> expression DIVIDE expression .)
+    LOCAL_VAR       reduce using rule 37 (expression -> expression DIVIDE expression .)
+    DEF             reduce using rule 37 (expression -> expression DIVIDE expression .)
+    IF              reduce using rule 37 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 37 (expression -> expression DIVIDE expression .)
+    END             reduce using rule 37 (expression -> expression DIVIDE expression .)
+    ELSE            reduce using rule 37 (expression -> expression DIVIDE expression .)
+    R_PAREN         reduce using rule 37 (expression -> expression DIVIDE expression .)
+    R_ULTRA_PAREN   reduce using rule 37 (expression -> expression DIVIDE expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
+
+  ! PLUS            [ reduce using rule 37 (expression -> expression DIVIDE expression .) ]
+  ! MINUS           [ reduce using rule 37 (expression -> expression DIVIDE expression .) ]
+  ! MULTIPLY        [ reduce using rule 37 (expression -> expression DIVIDE expression .) ]
+  ! DIVIDE          [ reduce using rule 37 (expression -> expression DIVIDE expression .) ]
+  ! MODULE          [ reduce using rule 37 (expression -> expression DIVIDE expression .) ]
+  ! EQUALS          [ reduce using rule 37 (expression -> expression DIVIDE expression .) ]
+  ! DIFFERENT       [ reduce using rule 37 (expression -> expression DIVIDE expression .) ]
+  ! LESS            [ reduce using rule 37 (expression -> expression DIVIDE expression .) ]
+  ! LESS_EQUAL      [ reduce using rule 37 (expression -> expression DIVIDE expression .) ]
+  ! GREATER         [ reduce using rule 37 (expression -> expression DIVIDE expression .) ]
+  ! GREATER_EQUAL   [ reduce using rule 37 (expression -> expression DIVIDE expression .) ]
+
+    comparison_operator            shift and go to state 36
+
+state 55
+
+    (38) expression -> expression MODULE expression .
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTIPLY resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for MODULE resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for LESS_EQUAL resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for GREATER_EQUAL resolved as shift
+    COMMA           reduce using rule 38 (expression -> expression MODULE expression .)
+    PRINT           reduce using rule 38 (expression -> expression MODULE expression .)
+    LOCAL_VAR       reduce using rule 38 (expression -> expression MODULE expression .)
+    DEF             reduce using rule 38 (expression -> expression MODULE expression .)
+    IF              reduce using rule 38 (expression -> expression MODULE expression .)
+    $end            reduce using rule 38 (expression -> expression MODULE expression .)
+    END             reduce using rule 38 (expression -> expression MODULE expression .)
+    ELSE            reduce using rule 38 (expression -> expression MODULE expression .)
+    R_PAREN         reduce using rule 38 (expression -> expression MODULE expression .)
+    R_ULTRA_PAREN   reduce using rule 38 (expression -> expression MODULE expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
+
+  ! PLUS            [ reduce using rule 38 (expression -> expression MODULE expression .) ]
+  ! MINUS           [ reduce using rule 38 (expression -> expression MODULE expression .) ]
+  ! MULTIPLY        [ reduce using rule 38 (expression -> expression MODULE expression .) ]
+  ! DIVIDE          [ reduce using rule 38 (expression -> expression MODULE expression .) ]
+  ! MODULE          [ reduce using rule 38 (expression -> expression MODULE expression .) ]
+  ! EQUALS          [ reduce using rule 38 (expression -> expression MODULE expression .) ]
+  ! DIFFERENT       [ reduce using rule 38 (expression -> expression MODULE expression .) ]
+  ! LESS            [ reduce using rule 38 (expression -> expression MODULE expression .) ]
+  ! LESS_EQUAL      [ reduce using rule 38 (expression -> expression MODULE expression .) ]
+  ! GREATER         [ reduce using rule 38 (expression -> expression MODULE expression .) ]
+  ! GREATER_EQUAL   [ reduce using rule 38 (expression -> expression MODULE expression .) ]
+
+    comparison_operator            shift and go to state 36
+
+state 56
+
+    (39) expression -> expression comparison_operator expression .
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTIPLY resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for MODULE resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for LESS_EQUAL resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for GREATER_EQUAL resolved as shift
+    COMMA           reduce using rule 39 (expression -> expression comparison_operator expression .)
+    PRINT           reduce using rule 39 (expression -> expression comparison_operator expression .)
+    LOCAL_VAR       reduce using rule 39 (expression -> expression comparison_operator expression .)
+    DEF             reduce using rule 39 (expression -> expression comparison_operator expression .)
+    IF              reduce using rule 39 (expression -> expression comparison_operator expression .)
+    $end            reduce using rule 39 (expression -> expression comparison_operator expression .)
+    END             reduce using rule 39 (expression -> expression comparison_operator expression .)
+    ELSE            reduce using rule 39 (expression -> expression comparison_operator expression .)
+    R_PAREN         reduce using rule 39 (expression -> expression comparison_operator expression .)
+    R_ULTRA_PAREN   reduce using rule 39 (expression -> expression comparison_operator expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
+
+  ! PLUS            [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! MINUS           [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! MULTIPLY        [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! DIVIDE          [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! MODULE          [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! EQUALS          [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! DIFFERENT       [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! LESS            [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! LESS_EQUAL      [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! GREATER         [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! GREATER_EQUAL   [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+
+    comparison_operator            shift and go to state 36
+
+state 57
+
+    (40) array_access -> LOCAL_VAR L_ULTRA_PAREN expression . R_ULTRA_PAREN
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
+
+    R_ULTRA_PAREN   shift and go to state 67
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
+
+    comparison_operator            shift and go to state 36
+
+state 58
 
     (16) input_statement -> LOCAL_VAR ASSIGN GETS DOT . CHOMP
 
-    CHOMP           shift and go to state 56
+    CHOMP           shift and go to state 68
 
 
-state 47
+state 59
 
     (18) array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list . R_ULTRA_PAREN
     (20) element_list -> element_list . COMMA expression
 
-    R_ULTRA_PAREN   shift and go to state 57
-    COMMA           shift and go to state 58
+    R_ULTRA_PAREN   shift and go to state 69
+    COMMA           shift and go to state 70
 
 
-state 48
+state 60
 
     (19) element_list -> expression .
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
 
     R_ULTRA_PAREN   reduce using rule 19 (element_list -> expression .)
     COMMA           reduce using rule 19 (element_list -> expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
 
+    comparison_operator            shift and go to state 36
 
-state 49
+state 61
 
     (26) parameter_list -> LOCAL_VAR .
 
@@ -943,16 +1647,16 @@ state 49
     COMMA           reduce using rule 26 (parameter_list -> LOCAL_VAR .)
 
 
-state 50
+state 62
 
     (25) function_definition -> DEF LOCAL_VAR L_PAREN parameter_list . R_PAREN statement_list END
     (27) parameter_list -> parameter_list . COMMA LOCAL_VAR
 
-    R_PAREN         shift and go to state 59
-    COMMA           shift and go to state 60
+    R_PAREN         shift and go to state 71
+    COMMA           shift and go to state 72
 
 
-state 51
+state 63
 
     (28) parameter_list -> empty .
 
@@ -960,7 +1664,7 @@ state 51
     COMMA           reduce using rule 28 (parameter_list -> empty .)
 
 
-state 52
+state 64
 
     (22) if_statement -> IF condition statement_list END .
 
@@ -973,7 +1677,7 @@ state 52
     ELSE            reduce using rule 22 (if_statement -> IF condition statement_list END .)
 
 
-state 53
+state 65
 
     (23) if_statement -> IF condition statement_list ELSE . statement_list END
     (2) statement_list -> . statement
@@ -1001,7 +1705,7 @@ state 53
     DEF             shift and go to state 13
     IF              shift and go to state 14
 
-    statement_list                 shift and go to state 61
+    statement_list                 shift and go to state 73
     statement                      shift and go to state 3
     print_statement                shift and go to state 4
     input_statement                shift and go to state 5
@@ -1011,39 +1715,92 @@ state 53
     array_definition               shift and go to state 11
     if_statement                   shift and go to state 12
 
-state 54
+state 66
 
     (24) condition -> expression comparison_operator expression .
+    (39) expression -> expression comparison_operator expression .
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
 
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULTIPLY resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for MODULE resolved as shift
+  ! shift/reduce conflict for EQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for LESS_EQUAL resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for GREATER_EQUAL resolved as shift
     PRINT           reduce using rule 24 (condition -> expression comparison_operator expression .)
     LOCAL_VAR       reduce using rule 24 (condition -> expression comparison_operator expression .)
     DEF             reduce using rule 24 (condition -> expression comparison_operator expression .)
     IF              reduce using rule 24 (condition -> expression comparison_operator expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
+
+  ! PLUS            [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! MINUS           [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! MULTIPLY        [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! DIVIDE          [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! MODULE          [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! EQUALS          [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! DIFFERENT       [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! LESS            [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! LESS_EQUAL      [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! GREATER         [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+  ! GREATER_EQUAL   [ reduce using rule 39 (expression -> expression comparison_operator expression .) ]
+
+    comparison_operator            shift and go to state 36
+
+state 67
+
+    (40) array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .
+
+    PLUS            reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    MINUS           reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    MULTIPLY        reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    DIVIDE          reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    MODULE          reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    EQUALS          reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    DIFFERENT       reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    LESS            reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    LESS_EQUAL      reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    GREATER         reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    GREATER_EQUAL   reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    COMMA           reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    PRINT           reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    LOCAL_VAR       reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    DEF             reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    IF              reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    $end            reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    END             reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    ELSE            reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    R_PAREN         reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
+    R_ULTRA_PAREN   reduce using rule 40 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
 
 
-state 55
-
-    (34) array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .
-
-    COMMA           reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    PRINT           reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    LOCAL_VAR       reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    DEF             reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    IF              reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    $end            reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    END             reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    ELSE            reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    EQUALS          reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    DIFFERENT       reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    LESS            reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    LESS_EQUAL      reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    GREATER         reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    GREATER_EQUAL   reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    R_PAREN         reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-    R_ULTRA_PAREN   reduce using rule 34 (array_access -> LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN .)
-
-
-state 56
+state 68
 
     (16) input_statement -> LOCAL_VAR ASSIGN GETS DOT CHOMP .
 
@@ -1056,7 +1813,7 @@ state 56
     ELSE            reduce using rule 16 (input_statement -> LOCAL_VAR ASSIGN GETS DOT CHOMP .)
 
 
-state 57
+state 69
 
     (18) array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN .
 
@@ -1069,7 +1826,7 @@ state 57
     ELSE            reduce using rule 18 (array_definition -> LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN .)
 
 
-state 58
+state 70
 
     (20) element_list -> element_list COMMA . expression
     (29) expression -> . INTEGER
@@ -1077,17 +1834,23 @@ state 58
     (31) expression -> . STRING
     (32) expression -> . LOCAL_VAR
     (33) expression -> . array_access
-    (34) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+    (34) expression -> . expression PLUS expression
+    (35) expression -> . expression MINUS expression
+    (36) expression -> . expression MULTIPLY expression
+    (37) expression -> . expression DIVIDE expression
+    (38) expression -> . expression MODULE expression
+    (39) expression -> . expression comparison_operator expression
+    (40) array_access -> . LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
 
     INTEGER         shift and go to state 19
     FLOAT           shift and go to state 20
     STRING          shift and go to state 21
     LOCAL_VAR       shift and go to state 22
 
-    expression                     shift and go to state 62
+    expression                     shift and go to state 74
     array_access                   shift and go to state 23
 
-state 59
+state 71
 
     (25) function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN . statement_list END
     (2) statement_list -> . statement
@@ -1115,7 +1878,7 @@ state 59
     DEF             shift and go to state 13
     IF              shift and go to state 14
 
-    statement_list                 shift and go to state 63
+    statement_list                 shift and go to state 75
     statement                      shift and go to state 3
     print_statement                shift and go to state 4
     input_statement                shift and go to state 5
@@ -1125,14 +1888,14 @@ state 59
     array_definition               shift and go to state 11
     if_statement                   shift and go to state 12
 
-state 60
+state 72
 
     (27) parameter_list -> parameter_list COMMA . LOCAL_VAR
 
-    LOCAL_VAR       shift and go to state 64
+    LOCAL_VAR       shift and go to state 76
 
 
-state 61
+state 73
 
     (23) if_statement -> IF condition statement_list ELSE statement_list . END
     (3) statement_list -> statement_list . statement
@@ -1154,7 +1917,7 @@ state 61
     (22) if_statement -> . IF condition statement_list END
     (23) if_statement -> . IF condition statement_list ELSE statement_list END
 
-    END             shift and go to state 65
+    END             shift and go to state 77
     PRINT           shift and go to state 9
     LOCAL_VAR       shift and go to state 10
     DEF             shift and go to state 13
@@ -1169,15 +1932,39 @@ state 61
     array_definition               shift and go to state 11
     if_statement                   shift and go to state 12
 
-state 62
+state 74
 
     (20) element_list -> element_list COMMA expression .
+    (34) expression -> expression . PLUS expression
+    (35) expression -> expression . MINUS expression
+    (36) expression -> expression . MULTIPLY expression
+    (37) expression -> expression . DIVIDE expression
+    (38) expression -> expression . MODULE expression
+    (39) expression -> expression . comparison_operator expression
+    (41) comparison_operator -> . EQUALS
+    (42) comparison_operator -> . DIFFERENT
+    (43) comparison_operator -> . LESS
+    (44) comparison_operator -> . LESS_EQUAL
+    (45) comparison_operator -> . GREATER
+    (46) comparison_operator -> . GREATER_EQUAL
 
     R_ULTRA_PAREN   reduce using rule 20 (element_list -> element_list COMMA expression .)
     COMMA           reduce using rule 20 (element_list -> element_list COMMA expression .)
+    PLUS            shift and go to state 31
+    MINUS           shift and go to state 32
+    MULTIPLY        shift and go to state 33
+    DIVIDE          shift and go to state 34
+    MODULE          shift and go to state 35
+    EQUALS          shift and go to state 37
+    DIFFERENT       shift and go to state 38
+    LESS            shift and go to state 39
+    LESS_EQUAL      shift and go to state 40
+    GREATER         shift and go to state 41
+    GREATER_EQUAL   shift and go to state 42
 
+    comparison_operator            shift and go to state 36
 
-state 63
+state 75
 
     (25) function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list . END
     (3) statement_list -> statement_list . statement
@@ -1199,7 +1986,7 @@ state 63
     (22) if_statement -> . IF condition statement_list END
     (23) if_statement -> . IF condition statement_list ELSE statement_list END
 
-    END             shift and go to state 66
+    END             shift and go to state 78
     PRINT           shift and go to state 9
     LOCAL_VAR       shift and go to state 10
     DEF             shift and go to state 13
@@ -1214,7 +2001,7 @@ state 63
     array_definition               shift and go to state 11
     if_statement                   shift and go to state 12
 
-state 64
+state 76
 
     (27) parameter_list -> parameter_list COMMA LOCAL_VAR .
 
@@ -1222,7 +2009,7 @@ state 64
     COMMA           reduce using rule 27 (parameter_list -> parameter_list COMMA LOCAL_VAR .)
 
 
-state 65
+state 77
 
     (23) if_statement -> IF condition statement_list ELSE statement_list END .
 
@@ -1235,7 +2022,7 @@ state 65
     ELSE            reduce using rule 23 (if_statement -> IF condition statement_list ELSE statement_list END .)
 
 
-state 66
+state 78
 
     (25) function_definition -> DEF LOCAL_VAR L_PAREN parameter_list R_PAREN statement_list END .
 
@@ -1251,3 +2038,80 @@ WARNING:
 WARNING: Conflicts:
 WARNING: 
 WARNING: shift/reduce conflict for LOCAL_VAR in state 9 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 51 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 51 resolved as shift
+WARNING: shift/reduce conflict for MULTIPLY in state 51 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 51 resolved as shift
+WARNING: shift/reduce conflict for MODULE in state 51 resolved as shift
+WARNING: shift/reduce conflict for EQUALS in state 51 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 51 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 51 resolved as shift
+WARNING: shift/reduce conflict for LESS_EQUAL in state 51 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 51 resolved as shift
+WARNING: shift/reduce conflict for GREATER_EQUAL in state 51 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 52 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 52 resolved as shift
+WARNING: shift/reduce conflict for MULTIPLY in state 52 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 52 resolved as shift
+WARNING: shift/reduce conflict for MODULE in state 52 resolved as shift
+WARNING: shift/reduce conflict for EQUALS in state 52 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 52 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 52 resolved as shift
+WARNING: shift/reduce conflict for LESS_EQUAL in state 52 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 52 resolved as shift
+WARNING: shift/reduce conflict for GREATER_EQUAL in state 52 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 53 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 53 resolved as shift
+WARNING: shift/reduce conflict for MULTIPLY in state 53 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 53 resolved as shift
+WARNING: shift/reduce conflict for MODULE in state 53 resolved as shift
+WARNING: shift/reduce conflict for EQUALS in state 53 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 53 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 53 resolved as shift
+WARNING: shift/reduce conflict for LESS_EQUAL in state 53 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 53 resolved as shift
+WARNING: shift/reduce conflict for GREATER_EQUAL in state 53 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 54 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 54 resolved as shift
+WARNING: shift/reduce conflict for MULTIPLY in state 54 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 54 resolved as shift
+WARNING: shift/reduce conflict for MODULE in state 54 resolved as shift
+WARNING: shift/reduce conflict for EQUALS in state 54 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 54 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 54 resolved as shift
+WARNING: shift/reduce conflict for LESS_EQUAL in state 54 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 54 resolved as shift
+WARNING: shift/reduce conflict for GREATER_EQUAL in state 54 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 55 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 55 resolved as shift
+WARNING: shift/reduce conflict for MULTIPLY in state 55 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 55 resolved as shift
+WARNING: shift/reduce conflict for MODULE in state 55 resolved as shift
+WARNING: shift/reduce conflict for EQUALS in state 55 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 55 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 55 resolved as shift
+WARNING: shift/reduce conflict for LESS_EQUAL in state 55 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 55 resolved as shift
+WARNING: shift/reduce conflict for GREATER_EQUAL in state 55 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 56 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 56 resolved as shift
+WARNING: shift/reduce conflict for MULTIPLY in state 56 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 56 resolved as shift
+WARNING: shift/reduce conflict for MODULE in state 56 resolved as shift
+WARNING: shift/reduce conflict for EQUALS in state 56 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 56 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 56 resolved as shift
+WARNING: shift/reduce conflict for LESS_EQUAL in state 56 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 56 resolved as shift
+WARNING: shift/reduce conflict for GREATER_EQUAL in state 56 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 66 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 66 resolved as shift
+WARNING: shift/reduce conflict for MULTIPLY in state 66 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 66 resolved as shift
+WARNING: shift/reduce conflict for MODULE in state 66 resolved as shift
+WARNING: shift/reduce conflict for EQUALS in state 66 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 66 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 66 resolved as shift
+WARNING: shift/reduce conflict for LESS_EQUAL in state 66 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 66 resolved as shift
+WARNING: shift/reduce conflict for GREATER_EQUAL in state 66 resolved as shift

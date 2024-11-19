@@ -62,12 +62,17 @@ tokens = (
 
     #Aporte Johann Ramírez
 
-    'MODULE'          # Operador de módulo
+    'MODULE',          # Operador de módulo
+    'DIVIDE',           # Operador '/'
+    'MULTIPLY',         # Operador '*'
+    
 )+tuple(reserved.values())
 
 #Tokens para expresiones regulares
 t_PLUS = r'\+'
 t_MINUS = r'-'
+t_MULTIPLY = r'\*'         
+t_DIVIDE = r'/'            
 t_GREATER = r'>'
 t_ASSIGN = r'='
 t_COMMA = r','
@@ -85,7 +90,7 @@ t_GREATER_EQUAL = r'>='
 t_LESS_EQUAL = r'<='
 t_LESS = r'<'
 t_DOT = r'\.'
-t_MODULO = r'%'  
+t_MODULE = r'%'  
 
 # Definición de expresiones regulares para tokens complejos
 def t_PRINT(t):

@@ -1,0 +1,6 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'x',1,0)
+LexToken(ASSIGN,'=',1,2)
+LexToken(INTEGER,5,1,4)
+LexToken(GREATER_EQUAL,'>=',1,6)
+LexToken(INTEGER,3,1,9)

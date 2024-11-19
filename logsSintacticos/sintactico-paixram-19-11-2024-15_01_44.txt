@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('function_def', 'suma', ['a', 'b'], [('return', ('bin_op', '+', 'a', 'b'))])])

@@ -1,0 +1,5 @@
+Analizador sintactico:
+('program', [('print', ['resultado'])])
+
+Errores:
+Syntax error at token '(', line 14

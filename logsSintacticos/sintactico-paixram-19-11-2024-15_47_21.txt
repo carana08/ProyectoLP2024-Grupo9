@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('hash_assign', 'informacion_usuario', [('hash_element', 'nombre', 'nombre'), ('hash_element', 'edad', 'edad'), ('hash_element', 'es_mayor_de_edad', ('bin_op', '>=', 'edad', 18))]), ('array_assign', 'numeros_favoritos', [3, 7, 42, 100]), ('function_def', 'es_par', ['numero'], [('return', ('bin_op', '==', ('bin_op', '%', 'numero', 2), 0))])])

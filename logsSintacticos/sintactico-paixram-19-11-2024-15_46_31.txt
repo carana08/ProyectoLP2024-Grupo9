@@ -1,0 +1,5 @@
+Error en el análisis sintáctico.
+
+Errores:
+Syntax error at token '.', line 14
+Syntax error at token 'puts', line 19

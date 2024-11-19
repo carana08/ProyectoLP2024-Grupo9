@@ -1,0 +1,13 @@
+Analizador lexico:
+LexToken(IF,'if',87,0)
+LexToken(LOCAL_VAR,'informacion_usuario',87,3)
+LexToken(L_ULTRA_PAREN,'[',87,22)
+LexToken(STRING,'es_mayor_de_edad',87,23)
+LexToken(R_ULTRA_PAREN,']',87,41)
+LexToken(AND,'and',87,43)
+LexToken(NOT,'not',87,47)
+LexToken(LOCAL_VAR,'nombre',87,51)
+LexToken(EQUALS,'==',87,58)
+LexToken(STRING,'',87,61)
+LexToken(ELSE,'else',89,65)
+LexToken(END,'end',90,70)

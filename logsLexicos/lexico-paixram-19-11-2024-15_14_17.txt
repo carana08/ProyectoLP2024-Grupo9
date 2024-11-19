@@ -1,0 +1,13 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'edad',314,33)
+LexToken(ASSIGN,'=',314,38)
+LexToken(INTEGER,9,314,40)
+LexToken(PRINT,'print',316,43)
+LexToken(L_PAREN,'(',316,48)
+LexToken(LOCAL_VAR,'edad',316,49)
+LexToken(GREATER_EQUAL,'>=',316,54)
+LexToken(INTEGER,12,316,57)
+LexToken(R_PAREN,')',316,59)
+
+Errores:
+Illegal character (';',316,18)

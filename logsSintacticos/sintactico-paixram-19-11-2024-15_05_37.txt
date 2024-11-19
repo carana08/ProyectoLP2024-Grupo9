@@ -1,0 +1,5 @@
+Analizador sintactico:
+('program', [('if_else', ('comparison', '==', ('bin_op', '%', 'x', 2), 0), [('puts', ['x ahora es par'])], [('puts', ['x ahora es impar'])]), ('assign', 'endx', ('bin_op', '+', 5, ('bin_op', '*', 3, 2))), ('print', ['x'])])
+
+Errores:
+Syntax error at token '+', line 150

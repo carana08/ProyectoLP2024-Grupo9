@@ -1,0 +1,13 @@
+Analizador lexico:
+LexToken(DEF,'def',5,0)
+LexToken(LOCAL_VAR,'suma',5,4)
+LexToken(L_PAREN,'(',5,8)
+LexToken(LOCAL_VAR,'a',5,9)
+LexToken(COMMA,',',5,10)
+LexToken(LOCAL_VAR,'b',5,12)
+LexToken(R_PAREN,')',5,13)
+LexToken(RETURN,'return',6,17)
+LexToken(LOCAL_VAR,'a',6,24)
+LexToken(PLUS,'+',6,26)
+LexToken(LOCAL_VAR,'b',6,28)
+LexToken(END,'end',7,30)

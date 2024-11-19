@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('array_assign', 'numeros_favoritos', [3, 7, 42, 100]), ('function_def', 'es_par', ['numero'], [('return', ('bin_op', '==', ('bin_op', '%', 'numero', 2), 0))]), ('assign', 'x', ('function_call', 'es_par', [3]))])

@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('assign', 'x', ('bin_op', '+', 5, ('bin_op', '*', 3, 2))), ('print', ['x'])])

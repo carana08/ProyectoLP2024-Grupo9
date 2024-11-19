@@ -62,12 +62,17 @@ def analyze_expression():
         errors_text.insert(tk.END, f"Error en el análisis léxico: {str(e)}")
         file.write(f"Error en el análisis léxico: {str(e)}")
     try:
-        # Analisis Sintactico
+    # Analisis Sintactico
         result = parser.parse(user_input)
+        print("Result: ", result);
         sintactico_log_file = os.path.join(logs_dirs["sintacticos"], f"sintactico-{get_git_user()}-{time}.txt")
         with open(sintactico_log_file, 'w') as file:
-            console_text.insert(tk.END, "\nAnalizador sintáctico:\n" + str(result) + "\n")
-            file.write("Analizador sintactico:\n" + str(result) + "\n")
+            if result:
+                console_text.insert(tk.END, "\nAnalizador sintáctico:\n" + str(result) + "\n")
+                file.write("Analizador sintactico:\n" + str(result) + "\n")
+            else:
+                console_text.insert(tk.END, "\nError en el análisis sintáctico.\n")
+                file.write("Error en el análisis sintáctico.\n")
             if errorList.erroresSintacticos:
                 errors_text.insert(tk.END, "Errores:\n")
                 file.write("\nErrores:\n")

@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('assign', 'edad', 9), ('print', [None])])

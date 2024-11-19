@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('assign', 'x', ('function_call', 'suma', ['a', 'b']))])

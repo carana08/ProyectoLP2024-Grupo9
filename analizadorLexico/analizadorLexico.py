@@ -24,7 +24,11 @@ reserved = {
     # Apórte de Luis Inga
     'nil': 'NIL',
     'while': 'WHILE',
-    'when': 'WHEN'
+    'when': 'WHEN',
+    'and': 'AND',
+    'or': 'OR',
+    'not': 'NOT',
+    'return': 'RETURN',
 
 }
 
@@ -58,7 +62,7 @@ tokens = (
     'L_ULTRA_PAREN',
     'R_ULTRA_PAREN',
     'TWO_POINTS',
-    'HASHARROW',
+    'HASHARROW', 
 
     #Aporte Johann Ramírez
 
@@ -91,7 +95,6 @@ t_LESS_EQUAL = r'<='
 t_LESS = r'<'
 t_DOT = r'\.'
 t_MODULE = r'%'  
-
 # Definición de expresiones regulares para tokens complejos
 def t_PRINT(t):
     r'print'

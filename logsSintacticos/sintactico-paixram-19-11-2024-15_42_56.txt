@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('assign', 'x', ('bin_op', 'and', ('bin_op', '>', ('bin_op', '-', ('bin_op', '*', ('bin_op', '+', 'a', 'b'), 'c'), ('bin_op', '/', 'd', 'e')), 'f'), ('unary_op', 'not', ('bin_op', 'or', 'g', ('bin_op', '==', 'h', 'i')))))])

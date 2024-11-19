@@ -1,0 +1,8 @@
+Error en el análisis sintáctico.
+
+Errores:
+Syntax error at token 'class', line 211
+Syntax error at token 'description', line 218
+Syntax error at token '>=', line 225
+Syntax error at token '>=', line 235
+Syntax error at token '@tasks', line 246

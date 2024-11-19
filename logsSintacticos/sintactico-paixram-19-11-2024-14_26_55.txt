@@ -1,0 +1,8 @@
+Analizador sintactico:
+None
+
+Errores:
+Syntax error at token 'Condición'
+Syntax error at token 'end'
+Syntax error at token '+'
+Syntax error: unexpected end of input

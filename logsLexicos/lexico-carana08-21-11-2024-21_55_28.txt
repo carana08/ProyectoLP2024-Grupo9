@@ -1,0 +1,8 @@
+Analizador lexico:
+LexToken(DEF,'def',275,0)
+LexToken(LOCAL_VAR,'show_tasks',275,4)
+LexToken(PUTS,'puts',276,21)
+LexToken(STRING,'Lista de Tareas:',276,26)
+LexToken(PUTS,'puts',277,50)
+LexToken(STRING,'#{index + 1}. #{task[:description]} - #{status}',277,55)
+LexToken(END,'end',278,109)

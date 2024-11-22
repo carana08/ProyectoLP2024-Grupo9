@@ -45,12 +45,14 @@ tokens = (
     'PLUS', 'MINUS',    # Operadores aritméticos
     'GREATER',          # Operador de comparación '>'
     'LESS',             # Operador de comparación '<'
-    'ASSIGN',            # Operador de asignación '='
+    'ASSIGN',           # Operador de asignación '='
     'EQUALS',           # Operador de comparación '=='
     'DIFFERENT',        # Operador de comparación '!='
     'GREATER_EQUAL',    # Operador de comparación '>='
     'LESS_EQUAL',       # Operador de comparación '<='
     'DOT',              # Punto .
+    'OR_OPERATOR',      # Operador OR '||'
+    'APPEND',           # Operador de concatenación '<<'
     
 
     # Aporte de Luis Inga
@@ -95,6 +97,8 @@ t_LESS_EQUAL = r'<='
 t_LESS = r'<'
 t_DOT = r'\.'
 t_MODULE = r'%'  
+t_OR_OPERATOR = r'\|\|'
+t_APPEND = r'<<'
 # Definición de expresiones regulares para tokens complejos
 def t_PRINT(t):
     r'print'

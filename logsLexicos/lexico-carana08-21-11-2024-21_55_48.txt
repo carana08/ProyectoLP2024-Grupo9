@@ -1,0 +1,19 @@
+Analizador lexico:
+LexToken(DEF,'def',293,0)
+LexToken(LOCAL_VAR,'show_tasks',293,4)
+LexToken(PUTS,'puts',294,21)
+LexToken(STRING,'Lista de Tareas:',294,26)
+LexToken(INSTANCE_VAR,'@tasks',295,51)
+LexToken(DOT,'.',295,57)
+LexToken(LOCAL_VAR,'each_with_index',295,58)
+LexToken(LOCAL_VAR,'do',295,74)
+LexToken(LOCAL_VAR,'task',295,78)
+LexToken(COMMA,',',295,82)
+LexToken(LOCAL_VAR,'index',295,84)
+LexToken(PUTS,'puts',296,96)
+LexToken(STRING,'#{index + 1}. #{task[:description]} - #{status}',296,101)
+LexToken(END,'end',297,155)
+
+Errores:
+Illegal character ('|',295,33)
+Illegal character ('|',295,45)

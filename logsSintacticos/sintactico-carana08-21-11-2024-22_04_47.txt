@@ -1,0 +1,5 @@
+Analizador sintactico:
+('program', [('assign', 'todo_list', ('method_call', 'TodoList', ('function_call', 'new', [('method_call', 'todo_list', ('function_call', 'add_task', ['Comprar leche']))]))), ('method_call', 'todo_list', ('function_call', 'add_task', ['Hacer ejercicio'])), ('method_call', 'todo_list', ('function_call', 'add_task', ['Estudiar Ruby'])), ('method_call', 'todo_list', ('function_call', 'show_tasks', [('method_call', 'todo_list', ('function_call', 'complete_task', [1]))])), ('method_call', 'todo_list', ('function_call', 'show_tasks', [('method_call', 'todo_list', ('function_call', 'delete_task', [0]))])), ('method_call', 'todo_list', ('function_call', 'show_tasks', []))])
+
+Errores:
+Syntax error at token '=', line 97

@@ -34,8 +34,30 @@ def p_statement(p):
                  | data_structure
                  | control_structure
                  | function_definition
-                 | return_statement'''
+                 | return_statement
+                 | class_definition
+                 | method_call
+                 | array_append
+                 | indexing
+                 | array_assignament'''
     p[0] = p[1]  # La sentencia es el resultado de la subregla
+    
+# Definición de clases
+def p_class_definition(p):
+    '''class_definition : CLASS CONSTANT class_body END'''
+    p[0] = ('class_def', p[2], p[3])  # Definición de clase con cuerpo
+    
+# Cuerpo de la clase
+def p_class_body(p):
+    '''class_body : statement_list'''
+    p[0] = p[1]  # El cuerpo de la clase es una lista de sentencias
+
+# Métodos o atributos dentro de una clase
+def p_class_statement(p):
+    '''class_statement : function_definition
+                       | assignment_statement'''
+    p[0] = p[1]  # Métodos o atributos se definen como funciones o asignaciones
+
 
 # Regla para el retorno
 def p_return_statement(p):
@@ -44,7 +66,10 @@ def p_return_statement(p):
 
 # Regla para la asignación
 def p_assignment_statement(p):
-    '''assignment_statement : LOCAL_VAR ASSIGN expression'''
+    '''assignment_statement : LOCAL_VAR ASSIGN expression
+                            | GLOBAL_VAR ASSIGN expression
+                            | INSTANCE_VAR ASSIGN expression
+                            | CLASS_VAR ASSIGN expression'''
     p[0] = ('assign', p[1], p[3])  # Representamos la asignación
 
 # Regla para la sentencia de impresión
@@ -117,21 +142,36 @@ def p_hash_element_list(p):
 
 # Elemento de un hash
 def p_hash_element(p):
-    '''hash_element : STRING HASHARROW expression'''
+    '''hash_element : STRING HASHARROW expression
+                    | LOCAL_VAR TWO_POINTS expression'''
     p[0] = ('hash_element', p[1], p[3])  # "clave" => valor
 
 # Operadores lógicos para condiciones complejas
 def p_logical_operator(p):
     '''logical_operator : AND
-                        | OR'''
+                        | OR
+                        | OR_OPERATOR'''
     p[0] = p[1]  # Retornamos el operador
 
 # Definición de arreglo
 def p_array_definition(p):
-    '''array_definition : LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN'''
+    '''array_definition : LOCAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+                        | LOCAL_VAR ASSIGN L_ULTRA_PAREN R_ULTRA_PAREN
+                        | GLOBAL_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+                        | GLOBAL_VAR ASSIGN L_ULTRA_PAREN R_ULTRA_PAREN
+                        | INSTANCE_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+                        | INSTANCE_VAR ASSIGN L_ULTRA_PAREN R_ULTRA_PAREN
+                        | CLASS_VAR ASSIGN L_ULTRA_PAREN element_list R_ULTRA_PAREN
+                        | CLASS_VAR ASSIGN L_ULTRA_PAREN R_ULTRA_PAREN'''
     p[0] = ('array_assign', p[1], p[4])  # variable = [ elementos ]
 
-# Lista de elementos en el arreglo
+def p_array_append(p):
+    '''array_append : LOCAL_VAR APPEND expression
+                    | GLOBAL_VAR APPEND expression
+                    | INSTANCE_VAR APPEND expression
+                    | CLASS_VAR APPEND expression'''
+    p[0] = ('array_append', p[1], p[3])
+
 def p_element_list(p):
     '''element_list : expression
                     | element_list COMMA expression'''
@@ -151,7 +191,8 @@ def p_control_structure(p):
 # Estructura condicional if-else
 def p_if_statement(p):
     '''if_statement : IF condition statement_list END
-                    | IF condition statement_list ELSE statement_list END'''
+                    | IF condition statement_list ELSE statement_list END
+                    | IF condition statement_list ELSIF condition statement_list ELSE statement_list END'''
     if len(p) == 5:
         p[0] = ('if', p[2], p[3])  # if condición then sentencias end
     else:
@@ -186,7 +227,7 @@ def p_condition(p):
         p[0] = p[2]  # ( condición )
     elif len(p) == 3:
         p[0] = ('not', p[2])  # not condición
-    elif len(p) == 4 and p.slice[2].type in ('AND', 'OR'):
+    elif len(p) == 4 and p.slice[2].type in ('AND', 'OR', 'OR_OPERATOR'):
         p[0] = ('logical_op', p[2], p[1], p[3])  # condición AND/OR condición
     else:
         p[0] = ('comparison', p[2], p[1], p[3])  # expresión operador expresión
@@ -194,7 +235,8 @@ def p_condition(p):
 # Definición de funciones (creación y llamada)
 def p_function_definition(p):
     '''function_definition : DEF LOCAL_VAR parameter_list statement_list END
-                           | DEF LOCAL_VAR statement_list END'''
+                           | DEF LOCAL_VAR statement_list END
+                           '''
     if len(p) == 6:
         p[0] = ('function_def', p[2], p[3], p[4])  # def nombre(parámetros) sentencias end
     else:
@@ -203,7 +245,7 @@ def p_function_definition(p):
 # Lista de parámetros de las funciones o vacío
 def p_parameter_list(p):
     '''parameter_list : L_PAREN parameter_list_inner R_PAREN
-                      | empty'''
+                      | L_PAREN R_PAREN'''
     if len(p) == 4:
         p[0] = p[2]  # ( parámetros )
     else:
@@ -223,7 +265,9 @@ def p_expression(p):
     '''expression : expression_binop
                   | expression_not
                   | expression_group
-                  | expression_term'''
+                  | expression_term
+                  | indexing
+                  | method_call'''
     p[0] = p[1]
 
 # Expresiones generales
@@ -240,7 +284,13 @@ def p_expression_binop(p):
                   | expression GREATER_EQUAL expression
                   | expression LESS_EQUAL expression
                   | expression AND expression
-                  | expression OR expression'''
+                  | expression OR expression
+                  | expression OR_OPERATOR expression
+                  | expression GREATER_EQUAL method_call
+                  | expression LESS_EQUAL method_call
+                  | expression GREATER method_call
+                  | expression LESS method_call
+                  | expression EQUALS method_call'''
     p[0] = ('bin_op', p[2], p[1], p[3])
 
 
@@ -257,7 +307,7 @@ def p_expression_term(p):
                   | FLOAT
                   | STRING
                   | LOCAL_VAR
-                  | array_access
+                  | indexing
                   | function_call'''
     p[0] = p[1]
 
@@ -276,11 +326,36 @@ def p_function_call(p):
         p[0] = ('function_call', p[1], p[2])  # nombre_funcion argumentos
     else:
         p[0] = ('function_call', p[1], []) 
+        
+def p_method_call(p):
+    '''method_call : LOCAL_VAR DOT function_call
+                   | GLOBAL_VAR DOT function_call
+                   | INSTANCE_VAR DOT function_call
+                   | CLASS_VAR DOT function_call
+                   | CONSTANT DOT function_call'''
+    p[0] = ('method_call', p[1], p[3])  # Representa el llamado al método
+
+
+def p_indexing(p):
+    '''indexing : LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+                | GLOBAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+                | INSTANCE_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+                | CLASS_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
+                | L_ULTRA_PAREN TWO_POINTS LOCAL_VAR R_ULTRA_PAREN
+                | indexing L_ULTRA_PAREN expression R_ULTRA_PAREN
+                | indexing L_ULTRA_PAREN TWO_POINTS LOCAL_VAR R_ULTRA_PAREN'''
+    if len(p) == 5:  # Caso simple: variable[index]
+        p[0] = ('indexing', p[1], p[3])  # Nodo para indexación simple
+    elif len(p) == 6:  # Caso anidado: variable[index][subindex]
+        p[0] = ('indexing', p[1], p[3])
+    else:  # Caso anidado con símbolo: variable[index][:key]
+        p[0] = ('key_access', p[1], p[3])  # Nodo para acceder con llave
+
 
 # Definición de acceso a elementos de arreglo
-def p_array_access(p):
-    '''array_access : LOCAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN'''
-    p[0] = ('array_access', p[1], p[3])  # variable[índice]
+def p_array_assignament(p):
+    '''array_assignament : indexing ASSIGN expression'''
+    p[0] = ('array_assignament', p[1], p[3])  # variable[índice]
 
 # Operadores de comparación
 def p_comparison_operator(p):

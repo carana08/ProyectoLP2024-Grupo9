@@ -39,7 +39,8 @@ def p_statement(p):
                  | method_call
                  | array_append
                  | indexing
-                 | array_assignament'''
+                 | array_assignament
+                 | expression'''
     p[0] = p[1]  # La sentencia es el resultado de la subregla
     
 # Definición de clases
@@ -69,7 +70,8 @@ def p_assignment_statement(p):
     '''assignment_statement : LOCAL_VAR ASSIGN expression
                             | GLOBAL_VAR ASSIGN expression
                             | INSTANCE_VAR ASSIGN expression
-                            | CLASS_VAR ASSIGN expression'''
+                            | CLASS_VAR ASSIGN expression
+                            | CONSTANT ASSIGN expression'''
     p[0] = ('assign', p[1], p[3])  # Representamos la asignación
 
 # Regla para la sentencia de impresión
@@ -273,25 +275,38 @@ def p_expression(p):
 # Expresiones generales
 def p_expression_binop(p):
     '''expression_binop : expression PLUS expression
-                  | expression MINUS expression
-                  | expression MULTIPLY expression
-                  | expression DIVIDE expression
-                  | expression MODULE expression
-                  | expression EQUALS expression
-                  | expression DIFFERENT expression
-                  | expression GREATER expression
-                  | expression LESS expression
-                  | expression GREATER_EQUAL expression
-                  | expression LESS_EQUAL expression
-                  | expression AND expression
-                  | expression OR expression
-                  | expression OR_OPERATOR expression
-                  | expression GREATER_EQUAL method_call
-                  | expression LESS_EQUAL method_call
-                  | expression GREATER method_call
-                  | expression LESS method_call
-                  | expression EQUALS method_call'''
-    p[0] = ('bin_op', p[2], p[1], p[3])
+                        | expression MINUS expression
+                        | expression MULTIPLY expression
+                        | expression DIVIDE expression
+                        | expression MODULE expression
+                        | expression EQUALS expression
+                        | expression DIFFERENT expression
+                        | expression GREATER expression
+                        | expression LESS expression
+                        | expression GREATER_EQUAL expression
+                        | expression LESS_EQUAL expression
+                        | expression AND expression
+                        | expression OR expression'''
+    
+    # Operaciones de suma
+    if p[2] == '+':
+        if isinstance(p[1], int) and isinstance(p[3], int):
+            p[0] = p[1] + p[3]  # Suma de enteros
+        elif (isinstance(p[1], int) or isinstance(p[1], float)) and (isinstance(p[3], int) or isinstance(p[3], float)):
+            p[0] = float(p[1]) + float(p[3])  # Suma con decimales (resultado decimal)
+        else:
+            # Error de tipos incompatibles
+            errorList.erroresSemanticos.append(f"Error semántico: Operación de suma entre tipos incompatibles: {type(p[1])} y {type(p[3])}")
+    
+    # Operaciones de resta
+    elif p[2] == '-':
+        if isinstance(p[1], int) and isinstance(p[3], int):
+            p[0] = p[1] - p[3]  # Resta de enteros
+        elif (isinstance(p[1], int) or isinstance(p[1], float)) and (isinstance(p[3], int) or isinstance(p[3], float)):
+            p[0] = float(p[1]) - float(p[3])  # Resta con decimales (resultado decimal)
+        else:
+            # Error de tipos incompatibles
+            errorList.erroresSemanticos.append(f"Error semántico: Operación de resta entre tipos incompatibles: {type(p[1])} y {type(p[3])}")
 
 
 def p_expression_not(p):
@@ -341,15 +356,22 @@ def p_indexing(p):
                 | GLOBAL_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
                 | INSTANCE_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
                 | CLASS_VAR L_ULTRA_PAREN expression R_ULTRA_PAREN
-                | L_ULTRA_PAREN TWO_POINTS LOCAL_VAR R_ULTRA_PAREN
+                | LOCAL_VAR L_ULTRA_PAREN TWO_POINTS expression R_ULTRA_PAREN
+                | GLOBAL_VAR L_ULTRA_PAREN TWO_POINTS expression R_ULTRA_PAREN
+                | INSTANCE_VAR L_ULTRA_PAREN TWO_POINTS expression R_ULTRA_PAREN
+                | CLASS_VAR L_ULTRA_PAREN TWO_POINTS expression R_ULTRA_PAREN
                 | indexing L_ULTRA_PAREN expression R_ULTRA_PAREN
-                | indexing L_ULTRA_PAREN TWO_POINTS LOCAL_VAR R_ULTRA_PAREN'''
+                | indexing L_ULTRA_PAREN TWO_POINTS expression R_ULTRA_PAREN'''
     if len(p) == 5:  # Caso simple: variable[index]
         p[0] = ('indexing', p[1], p[3])  # Nodo para indexación simple
-    elif len(p) == 6:  # Caso anidado: variable[index][subindex]
-        p[0] = ('indexing', p[1], p[3])
-    else:  # Caso anidado con símbolo: variable[index][:key]
-        p[0] = ('key_access', p[1], p[3])  # Nodo para acceder con llave
+    elif len(p) == 6:  # Caso con símbolo `:`: variable[:key]
+        p[0] = ('key_access', p[1], p[4])  # Nodo para acceso con llave
+    else:  # Caso anidado: variable[index][subindex] o variable[index][:key]
+        if p[3] == ':':  # Verifica si es `[:]` con llave
+            p[0] = ('key_access_nested', p[1], p[5])  # Nodo para acceso con llave anidado
+        else:
+            p[0] = ('indexing_nested', p[1], p[3])  # Nodo para indexación anidada
+
 
 
 # Definición de acceso a elementos de arreglo

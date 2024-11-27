@@ -1,0 +1,6 @@
+Analizador lexico:
+LexToken(INTEGER,5,1,0)
+LexToken(PLUS,'+',1,1)
+LexToken(INTEGER,7,1,2)
+LexToken(PLUS,'+',1,3)
+LexToken(INTEGER,5,1,4)

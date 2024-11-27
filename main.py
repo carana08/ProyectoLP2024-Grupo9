@@ -19,6 +19,7 @@ def get_git_user():
 def analyze_expression():
     errorList.erroresLexicos = []
     errorList.erroresSintacticos = []
+    errorList.erroresSemanticos = []
     
     
     user_input = input_text.get('1.0', tk.END).strip()
@@ -34,7 +35,8 @@ def analyze_expression():
     
     logs_dirs = {
             "lexicos": os.path.abspath("logsLexicos"),
-            "sintacticos": os.path.abspath("logsSintacticos")
+            "sintacticos": os.path.abspath("logsSintacticos"),
+            "semanticos": os.path.abspath("logsSemanticos")
     }
     for dir_path in logs_dirs.values():
         if not os.path.exists(dir_path):
@@ -82,10 +84,27 @@ def analyze_expression():
     except Exception as e:
         errors_text.insert(tk.END, f"Error en el análisis sintáctico: {str(e)}")
         file.write(f"Error en el análisis sintáctico: {str(e)}")
+    try:
+        # Analisis Semantico
+        semantico_log_file = os.path.join(logs_dirs["semanticos"], f"semantico-{get_git_user()}-{time}.txt")
+        with open(semantico_log_file, 'w') as file:
+            console_text.insert(tk.END, "\nAnalizador semántico:\n" + str(result) + "\n")
+            file.write("Analizador semantico:\n" + str(result) + "\n")
+            if errorList.erroresSemanticos:
+                errors_text.insert(tk.END, "\nErrores:\n")
+                file.write("\nErrores:\n")
+                for error in errorList.erroresSemanticos:
+                    errors_text.insert(tk.END, error + "\n")
+                    file.write(error + "\n")
+    except Exception as e:
+        console_text.insert(tk.END, f"Error en el análisis semántico: {str(e)}")
+        file.write(f"Error en el análisis semántico: {str(e)}")
+
     
     finally:
         errorList.erroresLexicos = []
         errorList.erroresSintacticos = []
+        errorList.erroresSemanticos = []
 
         
 root = tk.Tk()

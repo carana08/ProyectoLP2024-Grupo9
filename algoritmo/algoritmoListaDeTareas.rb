@@ -34,15 +34,6 @@ class TodoList
         puts "Tarea '#{removed_task[:description]}' eliminada."
       end
     end
-  
-    # Mostrar todas las tareas con su estado
-    def show_tasks
-      puts "Lista de Tareas:"
-      @tasks.each_with_index do |task, index|
-        status = task[:completed] ? "Completada" : "Pendiente"
-        puts "#{index + 1}. #{task[:description]} - #{status}"
-      end
-    end
   end
   
   # Ejemplo de uso de la lista de tareas

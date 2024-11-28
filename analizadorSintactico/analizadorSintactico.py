@@ -297,6 +297,7 @@ def p_parameter(p):
     else:
         p[0] = ('param', p[1], p[3])  # Parámetro con valor predeterminado
 
+
 # Define las expresiones
 def p_expression(p):
     '''expression : expression_binop
@@ -321,7 +322,8 @@ def p_expression_binop(p):
                         | expression GREATER_EQUAL expression
                         | expression LESS_EQUAL expression
                         | expression AND expression
-                        | expression OR expression'''
+                        | expression OR expression
+                        | expression PLUS_EQUAL expression'''
     
     # Operaciones de suma
     if p[2] == '+':

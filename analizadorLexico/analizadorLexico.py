@@ -52,6 +52,7 @@ tokens = (
     'DIFFERENT',        # Operador de comparación '!='
     'GREATER_EQUAL',    # Operador de comparación '>='
     'LESS_EQUAL',       # Operador de comparación '<='
+    'PLUS_EQUAL',        # Operador de incremento
     'DOT',              # Punto .
     'OR_OPERATOR',      # Operador OR '||'
     'APPEND',           # Operador de concatenación '<<'
@@ -98,6 +99,7 @@ t_EQUALS = r'=='
 t_DIFFERENT = r'!='
 t_GREATER_EQUAL = r'>='
 t_LESS_EQUAL = r'<='
+t_PLUS_EQUAL = r'\+='
 t_LESS = r'<'
 t_DOT = r'\.'
 t_MODULE = r'%'  

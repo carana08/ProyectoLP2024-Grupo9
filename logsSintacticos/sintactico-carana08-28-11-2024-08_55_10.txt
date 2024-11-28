@@ -1,0 +1,6 @@
+Error en el análisis sintáctico.
+
+Errores:
+Syntax error at token '=', line 906
+Syntax error at token 'end', line 912
+Syntax error at token 'end', line 920

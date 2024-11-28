@@ -1,0 +1,2 @@
+Analizador lexico:
+LexToken(L_ULTRA_PAREN,'[',1,0)

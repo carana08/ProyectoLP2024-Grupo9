@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('if', ('comparison', '>', 5, None), [('puts', ['variable'])])])

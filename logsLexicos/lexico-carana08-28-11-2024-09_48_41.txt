@@ -1,0 +1,4 @@
+Analizador lexico:
+LexToken(L_ULTRA_PAREN,'[',19,0)
+LexToken(OR_OPERATOR,'||',19,1)
+LexToken(R_ULTRA_PAREN,']',19,3)

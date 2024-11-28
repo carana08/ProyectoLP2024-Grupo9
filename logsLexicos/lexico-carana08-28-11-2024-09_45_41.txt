@@ -1,0 +1,16 @@
+Analizador lexico:
+LexToken(IF,'if',53,0)
+LexToken(INTEGER,5,53,3)
+LexToken(GREATER,'>',53,4)
+LexToken(INTEGER,6,53,5)
+LexToken(NOT,'not',53,10)
+LexToken(INTEGER,6,53,14)
+LexToken(LESS,'<',53,15)
+LexToken(INTEGER,7,53,16)
+LexToken(PUTS,'puts',54,18)
+LexToken(LOCAL_VAR,'hola',54,23)
+LexToken(END,'end',55,28)
+
+Errores:
+Illegal character ('&',53,8)
+Illegal character ('&',53,9)

@@ -1,0 +1,5 @@
+Error en el análisis sintáctico.
+
+Errores:
+Syntax error at token '[', line 92
+Syntax error at token 'else', line 94

@@ -1,0 +1,2 @@
+Analizador lexico:
+LexToken(AND,'and',19,0)

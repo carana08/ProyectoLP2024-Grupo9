@@ -1,0 +1,7 @@
+Analizador sintactico:
+('program', [('assign', 'juego', ('method_call', 'Juego', ('function_call', 'new', []))), ('assign', 'jugador1', ('method_call', 'juego', ('function_call', 'agregar_jugador', ['Juan']))), ('method_call', 'jugador1', ('function_call', 'aumentar_puntaje', []))])
+
+Errores:
+Syntax error at token '=', line 1261
+Syntax error at token 'end', line 1267
+Syntax error at token 'end', line 1274

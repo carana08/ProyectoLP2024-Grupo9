@@ -1,0 +1,9 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'hola',647,0)
+LexToken(L_PAREN,'(',647,4)
+LexToken(L_ULTRA_PAREN,'[',647,5)
+LexToken(INTEGER,1,647,6)
+LexToken(COMMA,',',647,7)
+LexToken(INTEGER,2,647,8)
+LexToken(R_ULTRA_PAREN,']',647,9)
+LexToken(R_PAREN,')',647,10)

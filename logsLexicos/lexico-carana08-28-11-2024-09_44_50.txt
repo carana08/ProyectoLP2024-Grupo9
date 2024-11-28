@@ -1,0 +1,13 @@
+Analizador lexico:
+LexToken(IF,'if',49,0)
+LexToken(INTEGER,5,49,3)
+LexToken(GREATER,'>',49,4)
+LexToken(INTEGER,6,49,5)
+LexToken(AND,'and',49,7)
+LexToken(NOT,'not',49,11)
+LexToken(INTEGER,6,49,15)
+LexToken(LESS,'<',49,16)
+LexToken(INTEGER,7,49,17)
+LexToken(PUTS,'puts',50,19)
+LexToken(LOCAL_VAR,'hola',50,24)
+LexToken(END,'end',51,29)

@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('assign', 'hola', 6), ('assign', 'hola', 'hola')])

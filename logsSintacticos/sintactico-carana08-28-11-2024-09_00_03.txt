@@ -1,0 +1,5 @@
+Analizador sintactico:
+('program', [6])
+
+Errores:
+Syntax error at token '=', line 1333

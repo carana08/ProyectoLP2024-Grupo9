@@ -1,0 +1,8 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'var',633,0)
+LexToken(DOT,'.',633,3)
+LexToken(LOCAL_VAR,'push',633,4)
+LexToken(L_PAREN,'(',633,8)
+LexToken(L_ULTRA_PAREN,'[',633,9)
+LexToken(R_ULTRA_PAREN,']',633,10)
+LexToken(R_PAREN,')',633,11)

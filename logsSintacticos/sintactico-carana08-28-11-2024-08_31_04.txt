@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('array', [5, 'hola'])])

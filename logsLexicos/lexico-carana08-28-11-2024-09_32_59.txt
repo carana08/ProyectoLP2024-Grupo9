@@ -1,0 +1,4 @@
+Analizador lexico:
+LexToken(INTEGER,1,1,0)
+LexToken(COMMA,',',1,1)
+LexToken(INTEGER,2,1,2)

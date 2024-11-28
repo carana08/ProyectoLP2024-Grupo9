@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('assign', 'nombre', ('method_call', 'juego', ('function_call', 'nombre', [9])))])

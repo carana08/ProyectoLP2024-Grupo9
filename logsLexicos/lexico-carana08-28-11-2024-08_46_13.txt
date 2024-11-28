@@ -1,0 +1,8 @@
+Analizador lexico:
+LexToken(DEF,'def',633,0)
+LexToken(LOCAL_VAR,'funcion',633,4)
+LexToken(L_PAREN,'(',633,11)
+LexToken(L_ULTRA_PAREN,'[',633,12)
+LexToken(R_ULTRA_PAREN,']',633,13)
+LexToken(R_PAREN,')',633,14)
+LexToken(END,'end',634,16)

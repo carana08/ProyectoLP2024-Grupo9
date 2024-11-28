@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('class_def', 'Juego', [('class_def', 'Jugador', [('function_def', 'initialize', [('param', 'nombre')], [('function_call', 'put', ['hola'])]), ('function_def', 'aumentar_puntaje', [], [('assign', '@puntaje', 1)])])])])

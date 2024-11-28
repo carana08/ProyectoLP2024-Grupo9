@@ -1,0 +1,6 @@
+Analizador semantico:
+None
+
+Errores:
+Error semántico: Operación de suma entre tipos incompatibles: <class 'str'> y <class 'str'>
+Error semántico: Operación de resta entre tipos incompatibles: <class 'str'> y <class 'str'>

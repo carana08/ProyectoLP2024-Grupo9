@@ -1,0 +1,4 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'nombre',875,0)
+LexToken(ASSIGN,'=',875,7)
+LexToken(LOCAL_VAR,'hola',875,9)

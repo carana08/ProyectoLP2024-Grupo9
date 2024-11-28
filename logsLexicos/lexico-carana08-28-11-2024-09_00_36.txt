@@ -1,0 +1,7 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'hola',1333,0)
+LexToken(ASSIGN,'=',1333,5)
+LexToken(INTEGER,6,1333,7)
+LexToken(LOCAL_VAR,'hola',1334,9)
+LexToken(ASSIGN,'=',1334,14)
+LexToken(LOCAL_VAR,'hola',1334,16)

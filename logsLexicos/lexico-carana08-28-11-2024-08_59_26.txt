@@ -1,0 +1,7 @@
+Analizador lexico:
+LexToken(INSTANCE_VAR,'@hola',1327,0)
+LexToken(ASSIGN,'=',1327,6)
+LexToken(LOCAL_VAR,'hola',1327,8)
+LexToken(INSTANCE_VAR,'@hola',1328,13)
+LexToken(ASSIGN,'=',1328,19)
+LexToken(INTEGER,5,1328,21)

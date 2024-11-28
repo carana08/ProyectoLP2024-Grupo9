@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('if', ('comparison', '>', 5, ('bin_op', 'and', 6, ('bin_op', '<', 6, 7))), [('puts', ['hola'])])])

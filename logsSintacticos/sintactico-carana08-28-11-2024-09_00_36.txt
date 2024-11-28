@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('assign', 'hola', 6), ('assign', 'hola', 'hola')])

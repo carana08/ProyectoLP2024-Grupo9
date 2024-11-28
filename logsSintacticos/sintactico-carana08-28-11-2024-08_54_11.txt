@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('assign', 'nombre', ('method_call', 'juego', ('function_call', 'nombre', [])))])

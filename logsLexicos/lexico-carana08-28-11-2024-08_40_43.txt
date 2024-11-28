@@ -1,0 +1,3 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'prueba',141,0)
+LexToken(INTEGER,5,141,7)

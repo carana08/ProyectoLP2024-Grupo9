@@ -179,7 +179,8 @@ def p_hash_element(p):
 def p_logical_operator(p):
     '''logical_operator : AND
                         | OR
-                        | OR_OPERATOR'''
+                        | OR_OPERATOR
+                        | AND_OPERATOR'''
     p[0] = p[1]  # Retornamos el operador
     
 def p_array(p):
@@ -257,12 +258,12 @@ def p_condition(p):
                  | condition logical_operator condition
                  | NOT condition
                  | L_PAREN condition R_PAREN'''
-    if len(p) == 4 and p[1] == '(':
+    if len(p) == 4 and p.slice[2].type in ('AND', 'OR', 'OR_OPERATOR'):
+        p[0] = ('logical_op', p[2], p[1], p[3])  # condición AND/OR condición
+    elif len(p) == 4 and p[1] == '(':
         p[0] = p[2]  # ( condición )
     elif len(p) == 3:
         p[0] = ('not', p[2])  # not condición
-    elif len(p) == 4 and p.slice[2].type in ('AND', 'OR', 'OR_OPERATOR'):
-        p[0] = ('logical_op', p[2], p[1], p[3])  # condición AND/OR condición
     else:
         p[0] = ('comparison', p[2], p[1], p[3])  # expresión operador expresión
 
@@ -388,6 +389,7 @@ def p_expression_binop(p):
             p[0] = p[1] < p[3]  # Operación válida entre enteros o flotantes
         else:
             errorList.erroresSemanticos.append(f"Error semántico: Tipos incompatibles para la operación menor que: {type(p[1])} y {type(p[3])}")
+    p[0] = ('bin_op', p[2], p[1], p[3])
 
 def p_expression_not(p):
     '''expression_not : NOT expression'''

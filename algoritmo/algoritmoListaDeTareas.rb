@@ -13,6 +13,7 @@ class TodoList
       task = { description: description, completed: false }
       @tasks << task
       puts "Tarea '#{description}' añadida a la lista."
+      puts true
     end
   
     # Marcar una tarea como completada

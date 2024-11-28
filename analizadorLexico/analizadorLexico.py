@@ -55,6 +55,7 @@ tokens = (
     'PLUS_EQUAL',        # Operador de incremento
     'DOT',              # Punto .
     'OR_OPERATOR',      # Operador OR '||'
+    'AND_OPERATOR',     # Operador AND '&&'
     'APPEND',           # Operador de concatenación '<<'
     
 
@@ -104,6 +105,7 @@ t_LESS = r'<'
 t_DOT = r'\.'
 t_MODULE = r'%'  
 t_OR_OPERATOR = r'\|\|'
+t_AND_OPERATOR = r'&&'
 t_APPEND = r'<<'
 t_RANGE = r'\.\.'  
 t_INCLUSIVE_RANGE = r'\.\.\.'

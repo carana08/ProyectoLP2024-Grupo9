@@ -1,0 +1,6 @@
+Analizador lexico:
+LexToken(L_ULTRA_PAREN,'[',1,0)
+LexToken(INTEGER,5,1,1)
+LexToken(COMMA,',',1,2)
+LexToken(STRING,'hola',1,3)
+LexToken(R_ULTRA_PAREN,']',1,9)

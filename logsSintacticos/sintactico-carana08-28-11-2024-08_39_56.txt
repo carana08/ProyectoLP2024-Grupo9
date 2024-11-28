@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('function_call', 'prueba', ['5'])])

@@ -1,0 +1,6 @@
+Error en el análisis sintáctico.
+
+Errores:
+Syntax error at token '.', line 30
+Syntax error at token '.', line 32
+Syntax error at token 'end', line 39

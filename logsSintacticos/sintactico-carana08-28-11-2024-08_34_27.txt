@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('function_def', 'calculadora', [], [('function_def', 'sumar', [('param', 'a'), 'b'], [3]), ('function_def', 'restar', [('param', 'a'), 'b'], [-1]), ('puts', ['Ingrese el primer número:']), ('input_chomp', 'num1'), ('puts', ['Ingrese el segundo número:']), ('input_chomp', 'num2'), ('assign', 'resultado_suma', ('function_call', 'sumar', ['num1', 'num2'])), ('assign', 'resultado_resta', ('function_call', 'restar', ['num1', 'num2'])), ('puts', ['La suma es: #{resultado_suma}']), ('puts', ['La resta es: #{resultado_resta}'])])])

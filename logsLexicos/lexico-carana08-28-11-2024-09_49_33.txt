@@ -1,0 +1,2 @@
+Analizador lexico:
+LexToken(OR,'or',19,0)

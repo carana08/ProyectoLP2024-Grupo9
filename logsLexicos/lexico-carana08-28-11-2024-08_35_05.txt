@@ -1,0 +1,5 @@
+Analizador lexico:
+LexToken(IF,'if',77,0)
+LexToken(LOCAL_VAR,'hola',77,3)
+LexToken(GREATER,'>',77,8)
+LexToken(INTEGER,5,77,10)

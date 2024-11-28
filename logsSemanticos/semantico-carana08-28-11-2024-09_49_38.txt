@@ -1,0 +1,2 @@
+Analizador semantico:
+None

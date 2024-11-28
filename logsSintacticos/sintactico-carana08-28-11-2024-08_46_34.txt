@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('function_def', 'funcion', [], ['cuerpo'])])

@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [11, ('method_call', 'todo_list', ('function_call', 'delete_task', [0])), ('method_call', 'todo_list', ('function_call', 'show_tasks', []))])

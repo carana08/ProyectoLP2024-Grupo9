@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('if_else', ('comparison', '>', 6, 5), [('puts', ['pasaste'])], [('function_call', 'prueba', ['5'])])])

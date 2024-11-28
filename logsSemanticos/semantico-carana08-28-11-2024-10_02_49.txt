@@ -1,0 +1,5 @@
+Analizador semantico:
+('program', [('if', ('comparison', '>', 'hola', None), [('puts', ['hola'])])])
+
+Errores:
+Error semántico: Tipos incompatibles para la operación menor que: <class 'str'> y <class 'int'>

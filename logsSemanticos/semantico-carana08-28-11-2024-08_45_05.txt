@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('method_call', 'var', ('function_call', 'push', [1, 2, 3]))])

@@ -1,0 +1,9 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'nombre',875,0)
+LexToken(ASSIGN,'=',875,7)
+LexToken(LOCAL_VAR,'juego',875,9)
+LexToken(DOT,'.',875,14)
+LexToken(LOCAL_VAR,'nombre',875,15)
+LexToken(INTEGER,5,876,22)
+LexToken(PLUS,'+',876,23)
+LexToken(INTEGER,4,876,24)

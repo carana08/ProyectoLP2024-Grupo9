@@ -1,0 +1,5 @@
+Error en el análisis sintáctico.
+
+Errores:
+Syntax error at token '+', line 37
+Syntax error at token 'end', line 43

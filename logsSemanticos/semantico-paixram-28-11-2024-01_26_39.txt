@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [0.08695652173913043])

@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('array_assign', 'arreglo', [1, 2, 3]), ('assign', 'valor', ('indexing', 'arreglo', 'uno'))])

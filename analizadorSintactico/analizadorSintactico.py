@@ -344,6 +344,27 @@ def p_expression_binop(p):
         else:
             # Error de tipos incompatibles
             errorList.erroresSemanticos.append(f"Error semántico: Operación de resta entre tipos incompatibles: {type(p[1])} y {type(p[3])}")
+
+     # Operación multiplicación (*)
+    elif p[2] == '*':
+        if isinstance(p[1], int) and isinstance(p[3], int):
+            p[0] = p[1] * p[3]
+        elif (isinstance(p[1], int) or isinstance(p[1], float)) and (isinstance(p[3], int) or isinstance(p[3], float)):
+            p[0] = float(p[1]) * float(p[3])
+        else:
+            errorList.erroresSemanticos.append(f"Error semántico: Operación de multiplicación entre tipos incompatibles: {type(p[1])} y {type(p[3])}")
+    
+    # Operación división (/)
+    elif p[2] == '/':
+        if isinstance(p[1], (int, float)) and isinstance(p[3], (int, float)):
+            if p[3] == 0:
+                errorList.erroresSemanticos.append("Error semántico: División por cero.")
+                p[0] = 'error'
+            else:
+                p[0] = p[1] / p[3]
+        else:
+            errorList.erroresSemanticos.append(f"Error semántico: Operación de división entre tipos incompatibles: {type(p[1])} y {type(p[3])}")
+
      # Operación mayor que (>)
     elif p[2] == '>':
         if isinstance(p[1], bool) or isinstance(p[3], bool):

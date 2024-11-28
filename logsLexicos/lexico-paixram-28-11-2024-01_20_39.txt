@@ -1,0 +1,4 @@
+Analizador lexico:
+LexToken(STRING,'fdsddf',135,0)
+LexToken(PLUS,'+',135,9)
+LexToken(INTEGER,3,135,11)

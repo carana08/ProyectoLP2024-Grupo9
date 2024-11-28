@@ -1,0 +1,7 @@
+Analizador lexico:
+LexToken(INTEGER,4,1,0)
+LexToken(MULTIPLY,'*',1,2)
+LexToken(INTEGER,34,1,4)
+
+Errores:
+Illegal character ('"',1,4)

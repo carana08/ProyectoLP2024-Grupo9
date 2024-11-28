@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('hash_assign', 'informacion_usuario', [('hash_element', 'nombre', 'nombre'), ('hash_element', 'edad', 'edad'), ('hash_element', 'es_mayor_de_edad', None)]), ('array_assign', 'numeros_favoritos', [3, 7, 42, 100]), ('function_def', 'es_par', [('param', 'numero')], [('return', None)]), None, ('unless_else', ('comparison', '<', 'edad', 0), [('puts', ['La edad es un número válido.'])], [('puts', ['La edad no puede ser negativa.'])])])

@@ -1,0 +1,5 @@
+Analizador lexico:
+LexToken(PUTS,'puts',133,0)
+LexToken(L_PAREN,'(',133,4)
+LexToken(LOCAL_VAR,'hola',133,5)
+LexToken(R_PAREN,')',133,9)

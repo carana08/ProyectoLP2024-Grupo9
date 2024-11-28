@@ -1,0 +1,6 @@
+Analizador sintactico:
+('program', [None, ('unless_else', ('comparison', '<', 'edad', 0), [('puts', ['La edad es un número válido.'])], [('puts', ['La edad no puede ser negativa.'])])])
+
+Errores:
+Syntax error at token '/', line 120
+Syntax error at token 'end', line 124

@@ -1,0 +1,5 @@
+Analizador semantico:
+('program', [None])
+
+Errores:
+Error semántico: Operación de multiplicación entre tipos incompatibles: <class 'int'> y <class 'str'>

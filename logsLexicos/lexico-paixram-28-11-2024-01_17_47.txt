@@ -1,0 +1,4 @@
+Analizador lexico:
+LexToken(INTEGER,3,135,0)
+LexToken(LESS,'<',135,2)
+LexToken(TRUE,True,135,4)

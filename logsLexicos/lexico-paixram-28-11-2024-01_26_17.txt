@@ -1,0 +1,4 @@
+Analizador lexico:
+LexToken(INTEGER,3,1,0)
+LexToken(DIVIDE,'/',1,2)
+LexToken(INTEGER,34,1,3)

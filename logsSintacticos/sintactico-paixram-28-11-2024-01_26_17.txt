@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [0.08823529411764706])

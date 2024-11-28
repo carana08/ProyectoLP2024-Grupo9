@@ -20,3 +20,10 @@ until x == 10
     puts "x ahora es impar"
   end
 end
+<<<<<<< HEAD
+=======
+
+rango_inclusivo = (1..10)
+
+rango_exclusivo = (1...100)
+>>>>>>> b9bb37db254b15d7fa13585639eba496a0149d51

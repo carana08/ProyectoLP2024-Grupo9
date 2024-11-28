@@ -1,0 +1,6 @@
+Analizador sintactico:
+('program', [('range_assign', 'rango_inclusivo', ('range', 'exclusive', '(', '..')), ('range_assign', 'rango_exclusivo', ('range', 'exclusive', '(', '...'))])
+
+Errores:
+Syntax error at token '=', line 41
+Syntax error at token 'end', line 47

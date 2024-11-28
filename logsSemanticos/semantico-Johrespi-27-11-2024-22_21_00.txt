@@ -1,0 +1,5 @@
+Analizador semantico:
+('program', [None])
+
+Errores:
+Error semántico: No se puede comparar un valor booleano con un número.

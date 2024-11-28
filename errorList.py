@@ -1,2 +1,3 @@
 erroresSintacticos = []
 erroresLexicos = []
+erroresSemanticos = []

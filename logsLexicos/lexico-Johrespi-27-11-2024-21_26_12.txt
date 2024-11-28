@@ -1,0 +1,7 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'rango_inclusivo',76,36)
+LexToken(ASSIGN,'=',76,52)
+LexToken(INTEGER,1,76,54)
+LexToken(DOT,'.',76,55)
+LexToken(DOT,'.',76,56)
+LexToken(INTEGER,5,76,57)

@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [5, ('puts', ['Rango inclusivo: #{rango_inclusivo.to_a}'])])

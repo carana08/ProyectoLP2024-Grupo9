@@ -1,0 +1,5 @@
+Analizador semantico:
+('program', [True, False, None])
+
+Errores:
+Error semántico: Operación de comparación mayor que entre tipos incompatibles: <class 'str'> y <class 'int'>

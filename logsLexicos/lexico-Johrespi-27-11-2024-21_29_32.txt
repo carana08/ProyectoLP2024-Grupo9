@@ -1,0 +1,11 @@
+Analizador lexico:
+LexToken(LOCAL_VAR,'rango_inclusivo2',18,17)
+LexToken(ASSIGN,'=',18,34)
+LexToken(INTEGER,1,18,36)
+LexToken(RANGE,'..',18,37)
+LexToken(INTEGER,5,18,39)
+LexToken(LOCAL_VAR,'rango_exclusivo2',19,41)
+LexToken(ASSIGN,'=',19,58)
+LexToken(INTEGER,1,19,60)
+LexToken(INCLUSIVE_RANGE,'...',19,61)
+LexToken(INTEGER,5,19,64)

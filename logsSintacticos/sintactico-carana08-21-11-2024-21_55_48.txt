@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('function_def', 'show_tasks', [], [('puts', ['Lista de Tareas:']), ('method_call', '@tasks', ('function_call', 'each_with_index', [('function_call', 'do', ['task', 'index'])])), ('puts', ['#{index + 1}. #{task[:description]} - #{status}'])])])

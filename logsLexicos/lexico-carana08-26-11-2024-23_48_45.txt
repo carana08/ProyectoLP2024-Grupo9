@@ -1,0 +1,2 @@
+Analizador lexico:
+LexToken(INTEGER,5,1,0)

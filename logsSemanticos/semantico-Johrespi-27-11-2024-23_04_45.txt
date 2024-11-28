@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('range_assign', 'rango_inclusivo', ('range', 'exclusive', '(', '..')), ('range_assign', 'rango_exclusivo', ('range', 'exclusive', '(', '...'))])

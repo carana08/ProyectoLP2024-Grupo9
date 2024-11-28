@@ -1,0 +1,20 @@
+Analizador lexico:
+LexToken(DEF,'def',5,0)
+LexToken(LOCAL_VAR,'presentar',5,4)
+LexToken(L_PAREN,'(',5,13)
+LexToken(LOCAL_VAR,'nombre',5,14)
+LexToken(ASSIGN,'=',5,21)
+LexToken(CONSTANT,'Invitado',5,24)
+LexToken(R_PAREN,')',5,33)
+LexToken(PUTS,'puts',6,36)
+LexToken(STRING,'Bienvenido, #{nombre}',6,41)
+LexToken(END,'end',7,65)
+LexToken(LOCAL_VAR,'x',9,70)
+LexToken(ASSIGN,'=',9,72)
+LexToken(INTEGER,1,9,74)
+LexToken(PLUS,'+',9,76)
+LexToken(INTEGER,3,9,78)
+
+Errores:
+Illegal character (''',5,24)
+Illegal character (''',5,33)

@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('assign', 'x', 4), ('puts', ['El valor de x es: #{x}']), ('function_call', 'presentar', ['Carlos'])])

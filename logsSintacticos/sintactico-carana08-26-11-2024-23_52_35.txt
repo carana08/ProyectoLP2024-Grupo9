@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('assign', 'variable', 13)])

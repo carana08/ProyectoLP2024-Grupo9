@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('indexing', '@task', 'index'), ('array_assignament', ('indexing', ('indexing', '@tasks', 'index'), ':'), 'true')])

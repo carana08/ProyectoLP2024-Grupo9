@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [('assign', 'a', 3), ('assign', 'x', 0), ('assign', 'b', 7), ('unless', ('comparison', '>', 'a', 5), [('if_else', ('comparison', '<', 'b', 10), [('puts', ['¡Hola, condición cumplida!'])], [('puts', ['¡Hola, condición no cumplida!'])])]), ('until', ('comparison', '==', 'x', 10), [None, ('if_else', ('comparison', '==', None, 0), [('puts', ['x ahora es par'])], [('puts', ['x ahora es impar'])])]), ('range_assign', 'rango_inclusivo', ('range', 'exclusive', '(', '..')), ('range_assign', 'rango_exclusivo', ('range', 'exclusive', '(', '...'))])

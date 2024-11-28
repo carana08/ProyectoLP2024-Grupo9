@@ -1,0 +1,2 @@
+Analizador sintactico:
+('program', [True, False, None])

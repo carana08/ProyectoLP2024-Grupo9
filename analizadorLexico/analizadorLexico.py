@@ -20,6 +20,8 @@ reserved = {
     # Aporte de Johann Ramírez
     'unless': 'UNLESS',  
     'until': 'UNTIL',   
+    'true': 'TRUE',   
+    'false': 'FALSE', 
 
     # Apórte de Luis Inga
     'nil': 'NIL',
@@ -45,12 +47,15 @@ tokens = (
     'PLUS', 'MINUS',    # Operadores aritméticos
     'GREATER',          # Operador de comparación '>'
     'LESS',             # Operador de comparación '<'
-    'ASSIGN',            # Operador de asignación '='
+    'ASSIGN',           # Operador de asignación '='
     'EQUALS',           # Operador de comparación '=='
     'DIFFERENT',        # Operador de comparación '!='
     'GREATER_EQUAL',    # Operador de comparación '>='
     'LESS_EQUAL',       # Operador de comparación '<='
+    'PLUS_EQUAL',        # Operador de incremento
     'DOT',              # Punto .
+    'OR_OPERATOR',      # Operador OR '||'
+    'APPEND',           # Operador de concatenación '<<'
     
 
     # Aporte de Luis Inga
@@ -69,6 +74,8 @@ tokens = (
     'MODULE',          # Operador de módulo
     'DIVIDE',           # Operador '/'
     'MULTIPLY',         # Operador '*'
+    'RANGE',            #RANGO
+    'INCLUSIVE_RANGE',  #RANGO INCLUSIVO
     
 )+tuple(reserved.values())
 
@@ -92,10 +99,26 @@ t_EQUALS = r'=='
 t_DIFFERENT = r'!='
 t_GREATER_EQUAL = r'>='
 t_LESS_EQUAL = r'<='
+t_PLUS_EQUAL = r'\+='
 t_LESS = r'<'
 t_DOT = r'\.'
 t_MODULE = r'%'  
+t_OR_OPERATOR = r'\|\|'
+t_APPEND = r'<<'
+t_RANGE = r'\.\.'  
+t_INCLUSIVE_RANGE = r'\.\.\.'
 # Definición de expresiones regulares para tokens complejos
+
+def t_TRUE(t):
+    r'true'
+    t.value = True
+    return t
+
+def t_FALSE(t):
+    r'false'
+    t.value = False
+    return t
+
 def t_PRINT(t):
     r'print'
     return t
@@ -136,7 +159,7 @@ def t_INTEGER(t):
     return t
 
 def t_STRING(t):
-    r'\".*?\"'
+    r'(\"(\\.|[^"\\])*\"|\'(\\.|[^\'\\])*\')'
     t.value = t.value[1:-1]  # Remover las comillas de la cadena
     return t
 

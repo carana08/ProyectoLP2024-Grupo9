@@ -71,6 +71,8 @@ tokens = (
     'MODULE',          # Operador de módulo
     'DIVIDE',           # Operador '/'
     'MULTIPLY',         # Operador '*'
+    'RANGE',            #RANGO
+    'INCLUSIVE_RANGE',  #RANGO INCLUSIVO
     
 )+tuple(reserved.values())
 
@@ -99,6 +101,8 @@ t_DOT = r'\.'
 t_MODULE = r'%'  
 t_OR_OPERATOR = r'\|\|'
 t_APPEND = r'<<'
+t_RANGE = r'\.\.'  
+t_INCLUSIVE_RANGE = r'\.\.\.'
 # Definición de expresiones regulares para tokens complejos
 def t_PRINT(t):
     r'print'

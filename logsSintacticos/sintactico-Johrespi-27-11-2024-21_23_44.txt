@@ -1,0 +1,10 @@
+Analizador sintactico:
+('program', [('assign', 'x', 4), ('puts', ['El valor de x es: #{x}']), ('function_call', 'presentar', ['Carlos'])])
+
+Errores:
+Syntax error at token '.', line 30
+Syntax error at token '.', line 34
+Syntax error at token '{', line 39
+Syntax error at token '}', line 39
+Syntax error at token '{', line 42
+Syntax error at token '}', line 42

@@ -125,8 +125,28 @@ def p_input_statement(p):
 # Definición de estructura de datos
 def p_data_structure(p):
     '''data_structure : array_definition
-                      | hash_definition'''
+                      | hash_definition
+                      | range_definition'''
     p[0] = p[1]  # La estructura de datos es el resultado de la subregla
+
+#Definición de rangos
+def p_range_definition(p):
+    '''range_definition : LOCAL_VAR ASSIGN L_PAREN expression RANGE expression R_PAREN
+                         | LOCAL_VAR ASSIGN L_PAREN expression INCLUSIVE_RANGE expression R_PAREN
+                         | LOCAL_VAR ASSIGN expression RANGE expression
+                         | LOCAL_VAR ASSIGN expression INCLUSIVE_RANGE expression'''
+    # Si hay paréntesis
+    if len(p) == 7:
+        if p[5] == '..':
+            p[0] = ('range_assign', p[1], ('range', 'inclusive', p[4], p[6]))
+        else:
+            p[0] = ('range_assign', p[1], ('range', 'exclusive', p[4], p[6]))
+    # Si no hay paréntesis
+    else:
+        if p[4] == '..':
+            p[0] = ('range_assign', p[1], ('range', 'inclusive', p[3], p[5]))
+        else:
+            p[0] = ('range_assign', p[1], ('range', 'exclusive', p[3], p[5]))
 
 # Definición de hashes (diccionarios)
 def p_hash_definition(p):

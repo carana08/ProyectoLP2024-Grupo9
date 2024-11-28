@@ -20,6 +20,8 @@ reserved = {
     # Aporte de Johann Ramírez
     'unless': 'UNLESS',  
     'until': 'UNTIL',   
+    'true': 'TRUE',   
+    'false': 'FALSE', 
 
     # Apórte de Luis Inga
     'nil': 'NIL',
@@ -104,6 +106,17 @@ t_APPEND = r'<<'
 t_RANGE = r'\.\.'  
 t_INCLUSIVE_RANGE = r'\.\.\.'
 # Definición de expresiones regulares para tokens complejos
+
+def t_TRUE(t):
+    r'true'
+    t.value = True
+    return t
+
+def t_FALSE(t):
+    r'false'
+    t.value = False
+    return t
+
 def t_PRINT(t):
     r'print'
     return t

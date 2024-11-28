@@ -122,6 +122,12 @@ def p_input_statement(p):
     else:
         p[0] = ('input_chomp', p[1])  # variable = gets.chomp
 
+# Regla para booleanos
+def p_boolean(p):
+    '''expression : TRUE
+                  | FALSE'''
+    p[0] = p[1]  # Asignar el valor True o False
+
 # Definición de estructura de datos
 def p_data_structure(p):
     '''data_structure : array_definition
@@ -336,7 +342,23 @@ def p_expression_binop(p):
         else:
             # Error de tipos incompatibles
             errorList.erroresSemanticos.append(f"Error semántico: Operación de resta entre tipos incompatibles: {type(p[1])} y {type(p[3])}")
+     # Operación mayor que (>)
+    elif p[2] == '>':
+        if isinstance(p[1], bool) or isinstance(p[3], bool):
+            errorList.erroresSemanticos.append(f"Error semántico: No se puede comparar un valor booleano con un número.")
+        elif isinstance(p[1], (int, float)) and isinstance(p[3], (int, float)):
+            p[0] = p[1] > p[3]  # Operación válida entre enteros o flotantes
+        else:
+            errorList.erroresSemanticos.append(f"Error semántico: Tipos incompatibles para la operación mayor que: {type(p[1])} y {type(p[3])}")
 
+    # Operación menor que (<)
+    elif p[2] == '<':
+        if isinstance(p[1], bool) or isinstance(p[3], bool):
+            errorList.erroresSemanticos.append(f"Error semántico: No se puede comparar un valor booleano con un número.")
+        elif isinstance(p[1], (int, float)) and isinstance(p[3], (int, float)):
+            p[0] = p[1] < p[3]  # Operación válida entre enteros o flotantes
+        else:
+            errorList.erroresSemanticos.append(f"Error semántico: Tipos incompatibles para la operación menor que: {type(p[1])} y {type(p[3])}")
 
 def p_expression_not(p):
     '''expression_not : NOT expression'''

@@ -1,0 +1,7 @@
+Analizador lexico:
+LexToken(INTEGER,5,5,0)
+LexToken(GREATER,'>',5,2)
+LexToken(INTEGER,3,5,4)
+LexToken(INTEGER,2,6,6)
+LexToken(GREATER,'>',6,8)
+LexToken(INTEGER,2,6,10)

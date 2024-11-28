@@ -1,0 +1,5 @@
+Analizador sintactico:
+('program', [5])
+
+Errores:
+Syntax error at token '>', line 19

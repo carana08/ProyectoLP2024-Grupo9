@@ -1,0 +1,5 @@
+Analizador sintactico:
+('program', [3])
+
+Errores:
+Syntax error at token 'True', line 1

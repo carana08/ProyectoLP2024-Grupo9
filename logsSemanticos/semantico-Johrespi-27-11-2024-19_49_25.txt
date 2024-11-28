@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('function_def', 'presentar', [('param', 'nombre', 'Invitado')], [('puts', ['Bienvenido, #{nombre}'])]), ('assign', 'x', 4)])

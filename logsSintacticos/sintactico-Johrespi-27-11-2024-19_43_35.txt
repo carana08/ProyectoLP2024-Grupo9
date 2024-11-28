@@ -1,0 +1,5 @@
+Analizador sintactico:
+('program', [('assign', 'x', 4)])
+
+Errores:
+Syntax error at token '=', line 9

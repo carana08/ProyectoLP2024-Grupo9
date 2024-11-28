@@ -255,12 +255,21 @@ def p_parameter_list(p):
 
 # Parámetros
 def p_parameter_list_inner(p):
-    '''parameter_list_inner : LOCAL_VAR
+    '''parameter_list_inner : parameter
                             | parameter_list_inner COMMA LOCAL_VAR'''
     if len(p) == 2:
         p[0] = [p[1]]  # Lista con un parámetro
     else:
         p[0] = p[1] + [p[3]]  # Concatenamos los parámetros
+
+# Parámetro individual con o sin valor predeterminado
+def p_parameter(p):
+    '''parameter : LOCAL_VAR
+                 | LOCAL_VAR ASSIGN expression'''
+    if len(p) == 2:
+        p[0] = ('param', p[1])  # Parámetro sin valor predeterminado
+    else:
+        p[0] = ('param', p[1], p[3])  # Parámetro con valor predeterminado
 
 # Define las expresiones
 def p_expression(p):

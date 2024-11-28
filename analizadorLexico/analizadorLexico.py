@@ -140,7 +140,7 @@ def t_INTEGER(t):
     return t
 
 def t_STRING(t):
-    r'\".*?\"'
+    r'(\"(\\.|[^"\\])*\"|\'(\\.|[^\'\\])*\')'
     t.value = t.value[1:-1]  # Remover las comillas de la cadena
     return t
 

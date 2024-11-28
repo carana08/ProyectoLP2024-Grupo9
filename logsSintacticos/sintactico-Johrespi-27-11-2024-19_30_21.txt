@@ -1,0 +1,6 @@
+Analizador sintactico:
+('program', ['presentar'])
+
+Errores:
+Syntax error at token '=', line 6
+Syntax error at token ')', line 10

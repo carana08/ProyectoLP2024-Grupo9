@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('puts', []), ('function_def', 'var', [], ['cuerpo'])])

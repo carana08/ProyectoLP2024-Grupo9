@@ -1,0 +1,2 @@
+Analizador semantico:
+('program', [('puts', []), ('array', [1, 1])])

@@ -1,0 +1,7 @@
+Analizador lexico:
+LexToken(PUTS,'puts',1,0)
+LexToken(L_ULTRA_PAREN,'[',1,5)
+LexToken(INTEGER,1,1,6)
+LexToken(COMMA,',',1,7)
+LexToken(INTEGER,1,1,8)
+LexToken(R_ULTRA_PAREN,']',1,9)

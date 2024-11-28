@@ -40,7 +40,8 @@ def p_statement(p):
                  | array_append
                  | indexing
                  | array_assignament
-                 | expression'''
+                 | expression
+                 | array'''
     p[0] = p[1]  # La sentencia es el resultado de la subregla
     
 # Definición de clases
@@ -180,6 +181,11 @@ def p_logical_operator(p):
                         | OR
                         | OR_OPERATOR'''
     p[0] = p[1]  # Retornamos el operador
+    
+def p_array(p):
+    '''array : L_ULTRA_PAREN element_list R_ULTRA_PAREN
+             | L_ULTRA_PAREN R_ULTRA_PAREN'''
+    p[0] = ('array', p[2])  # [ elementos ]
 
 # Definición de arreglo
 def p_array_definition(p):

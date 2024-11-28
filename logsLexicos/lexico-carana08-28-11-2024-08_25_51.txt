@@ -1,0 +1,6 @@
+Analizador lexico:
+LexToken(PUTS,'puts',1,0)
+LexToken(DEF,'def',1,5)
+LexToken(LOCAL_VAR,'var',1,9)
+LexToken(LOCAL_VAR,'cuerpo',1,13)
+LexToken(END,'end',1,20)
